@@ -4,3 +4,4 @@ statsmodels
 pandas
 seaborn
 pmdarima
+xlogit
