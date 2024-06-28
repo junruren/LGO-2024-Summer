@@ -81,6 +81,93 @@
 \setlength{\multicolsep}{1pt}
 \setlength{\columnsep}{2pt}
 
+Set Algebra:
+\begin{itemize}
+    \item \Blue{Union} $A$ or $B$; $A \cup B$.
+    \item \Blue{Intersection} $A$ and $B$; $A \cap B$.
+    \item \Blue{Complement} not $A$; $A^C$.
+    \item \Blue{Difference} $A$ but not $B$; $A \backslash B$
+    \item \Blue{Disjoint Events aka. mutually exclusive} events $A$ and $B$ are disjoint if they don't share any
+        outcomes in common (i.e., $A \text{ and } B = \emptyset$).
+    \item \Blue{Subset} $A \subseteq B$
+\end{itemize}
+
+\Blue{Trial} a repetition of a random experiment/process. Trials're \underline{independent}: none gives information about the
+others; are \underline{stable}: reuslts could have appeared in any order.
+
+\Blue{Outcome} a possible result of a trail.
+
+\Blue{Sample space} the set of all possible outcomes. Often denoted as $S$.
+
+\Blue{Event} a set of outcomes of an experiment (i.e., a subset of the sample space).
+
+\Red{Probability} is a long run proportion of an outcome in repeated trials.
+\begin{itemize}
+    \item Probabilities act as ``targets" of estimation
+    \item Proportions based on data ``estimate'' probabilities. Would approach probabilities if observe infinite trials.
+\end{itemize}
+Formally, \fbox{$A \mapsto \mathbb{P}(A), \mathbb{P}(A) \in \left[0, 1\right]$}
+A probability $\mathbb{P}(\cdot)$ on a sample space $S$ is a function that assigns a snumber between 0 and 1 to all
+events, $A$ in the sample space (i.e., any possible subset of the sample space) and subject to three requirements
+(axioms):
+\begin{enumerate}
+    \item $\mathbb{P}(S) = 1$: probability of \textit{something} in the sample space happening is 1
+    \item $\mathbb{P}(A) \ge 0, \forall A$
+    \item $A \text{ and } B = \emptyset \text{ (A, B disjoint) } \Rightarrow \mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B)$
+\end{enumerate}
+
+More takeaways
+\begin{itemize}
+    \item $A \subseteq B \Rightarrow \mathbb{P}(A) \le \mathbb{P}(B)$
+    \item $A$, $B$, $C$ are pairwise disjoint $\Rightarrow \mathbb{P}(A \cup B \cup C) = \mathbb{P}(A) + \mathbb{P}(B) + \mathbb{P}(C)$
+    \item $\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \text{ and } B)$
+\end{itemize}
+
+\Red{Joint Probability} $\mathbb{P}(A \text{ and } B)$ is the joint probability that events $A$ and $B$ occur.
+
+\Red{Conditional Probability} $\mathbb{P}(A | B) = \frac{\mathbb{P}(A \text{ and } B)}{\mathbb{P}(B)}, \mathbb{P}(B) > 0$ the
+probability of observing event $A$ if (given that) one has observed $B$. Bear in mind: $\mathbb{P}(A | B) \neq \mathbb{P}(B | A) $
+\Green{Product Rule} $\mathbb{P}(A \text{ and } B) = \mathbb{P}(B) \cdot \mathbb{P}(A | B)$.
+
+\Red{Independent Events} $A$ and $B$ are independent if $\mathbb{P}(A \text{ and } B) = \mathbb{P}(A) \cdot \mathbb{P}(B)$; one
+event happening doesn't affect the probability of the other event happening. Can easily deduce that
+$\mathbb{P}(A | B) = \mathbb{P}(A)$ and $\mathbb{P}(B | A) = \mathbb{P}(B)$.
+
+\Hint{Independence and Disjointness are \textbf{NOT} synonyms.}
+\begin{itemize}
+    \item Independent $\Rightarrow \mathbb{P}(A \text{ and } B) = \mathbb{P}(A) \cdot \mathbb{P}(B)$
+    \item Disjoint $\Rightarrow \mathbb{P}(A \text{ and } B) = 0$. Disjoint events are extremely dependent: If one event
+        occurs, the other cannot.
+\end{itemize}
+
+\Red{Random variable} a numerical function on a sample space with probabilities. (Think as a scoring mechanism.)
+\begin{itemize}
+    \item Input: an outcome in the sample space
+    \item Output: a number
+\end{itemize}
+
+\Blue{Discrete RVs} only countably many values are possible
+
+\Blue{Continous RVs} can take on uncountably infinitely many values
+
+\Red{Probability Distribution Function (PDF)} \fbox{$\mathbf{p}_X(x) = \mathbb{P}(X = x)$} is the probability that the
+random variable $X$ takes on the value $x$. I really hate $\mathbf{p}_X(x)$ this styling, so only $\mathbb{P}(X = x)$
+moving forward.
+
+\Blue{Properties of PDFs} any function that satisfies the following conditions is a probability distribution function of
+a \underline{Discrete} random variable:
+\begin{enumerate}
+    \item $\mathbb{P}(X = x) \ge 0, \forall x \in \mathbb{R}$ (for any real number)
+    \item $\mathbb{P}(X = x) > 0$ for values that the random variable $X$ can actually take on
+    \item $\mathbb{P}(X = x) = 0$ for values that aren't possible for the random variable $X$
+    \item $\sum_x \mathbb{P}(X = x) = 1$
+\end{enumerate}
+
+\Red{Expected Value} \fbox{$\mathbb{E}\left[X\right] = \sum_x x \cdot \mathbb{P}(X = x)$}
+
+\Red{Variance} \fbox{$\text{Var}(X) = \mathbb{E}\left[(X - \mathbb{E}[X])^2\right] = \sum_x (x - \mathbb{E}[X])^2 \cdot \mathbb{P}(X = x)$}
+
+\Red{Standard Deviation}
 
 \end{multicols}
 \end{document}
