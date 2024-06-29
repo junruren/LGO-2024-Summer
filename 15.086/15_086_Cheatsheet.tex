@@ -230,6 +230,12 @@ If \fbox{$X \sim \text{Bern(p)}$}, then:
         \end{aligned}
     }
 \end{displaymath}
+\Hint{
+    \begin{itemize}
+        \item Variance maximized when $p = 0.5$
+        \item Variance minimized when $p = 0$ or $1$
+    \end{itemize}
+}
 Useful for tracking \underline{how many} successes happen in $n$ independent trials.
 
 \Red{Binomial Problems} following must hold:
@@ -246,14 +252,14 @@ Useful for tracking \underline{how many} successes happen in $n$ independent tri
 
 \Red{Binomial Distribution} \fbox{$X \sim \text{Binom}(n, p)$} where $X$ is an RV tracking the number of successes in
 $n$ independent trials with success probability $p$. $X$'s PDF:
-\fbox{$\mathbb{P}(X = k) = \binom{n}{k} p^k (1-p)^{n-k}, \forall k \in \left\{0, \dots, n\right\}$}.
+\fbox{$\forall k \in \left\{0, \dots, n\right\}, \mathbb{P}(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$}.
 \Hint{Attn: $X$ here is not for one single trial!}.
 \begin{itemize}
     \item A \textbf{Bernoulli RV}: useful for one trial's success/failure.
     \item A \textbf{Binomial RV}: useful for total number of successes.
 \end{itemize}
 \Blue{Binomial as the Sum of Bernoullis} $n$ independent Bernoulli RVs each with the same success probability $p$:
-$X_i \sim \text{Bern}(p), \forall i \in {1, \dots, n}$.
+$\forall i \in {1, \dots, n}, X_i \sim \text{Bern}(p)$.
 Define \fbox{$S_n = \sum_{i=1}^{n} X_i$}, then denote \fbox{$S_n \sim \text{Binom}(n, p)$}.
 \Hint{$\text{Binom}(1, p) = \text{Bern}(p)$}
 
