@@ -95,7 +95,7 @@ Set Algebra:
 \Blue{Trial} a repetition of a random experiment/process. Trials're \underline{independent}: none gives information about the
 others; are \underline{stable}: reuslts could have appeared in any order.
 
-\Blue{Outcome} a possible result of a trail.
+\Blue{Outcome} a possible result of a trial.
 
 \Blue{Sample space} the set of all possible outcomes. Often denoted as $S$.
 
@@ -126,7 +126,8 @@ More takeaways
 \Red{Joint Probability} $\mathbb{P}(A \text{ and } B)$ is the joint probability that events $A$ and $B$ occur.
 
 \Red{Conditional Probability} $\mathbb{P}(A | B) = \frac{\mathbb{P}(A \text{ and } B)}{\mathbb{P}(B)}, \mathbb{P}(B) > 0$ the
-probability of observing event $A$ if (given that) one has observed $B$. Bear in mind: $\mathbb{P}(A | B) \neq \mathbb{P}(B | A) $
+probability of observing event $A$ if (given that) one has observed $B$. Bear in mind: $\mathbb{P}(A | B) \neq \mathbb{P}(B | A)$
+
 \Green{Product Rule} $\mathbb{P}(A \text{ and } B) = \mathbb{P}(B) \cdot \mathbb{P}(A | B)$.
 
 \Red{Independent Events} $A$ and $B$ are independent if $\mathbb{P}(A \text{ and } B) = \mathbb{P}(A) \cdot \mathbb{P}(B)$; one
@@ -165,9 +166,96 @@ a \underline{Discrete} random variable:
 
 \Red{Expected Value} \fbox{$\mathbb{E}\left[X\right] = \sum_x x \cdot \mathbb{P}(X = x)$}
 
-\Red{Variance} \fbox{$\text{Var}(X) = \mathbb{E}\left[(X - \mathbb{E}[X])^2\right] = \sum_x (x - \mathbb{E}[X])^2 \cdot \mathbb{P}(X = x)$}
+\Red{Variance} a probability weighted mean of the possible squared deviations.
+\begin{displaymath}
+    \boxed{
+        \begin{aligned}
+            \text{Var}(X) &= \mathbb{E}\left[(X - \mathbb{E}[X])^2\right]\\
+            &= \sum_x (x - \mathbb{E}[X])^2 \cdot \mathbb{P}(X = x) \\
+            &= \mathbb{E}\left[X^2\right] - \left(\mathbb{E}\left[X\right]\right)^2
+        \end{aligned}
+    }
+\end{displaymath}
 
-\Red{Standard Deviation}
+\Red{Standard Deviation} \fbox{$\text{SD}(X) = \sqrt{\text{Var}(X)}$}
+
+\Green{Handy Transformations}
+\begin{displaymath}
+    \boxed{
+        \begin{aligned}
+            \mathbb{E}\left[a + b X\right] &= a + b\mathbb{E}\left[X\right] \\
+            \text{Var}(a + b X) &= b^2 \text{Var}(X) \\
+            \text{SD}(a + b X) &= |b| \text{SD}(X)
+        \end{aligned}
+    }
+\end{displaymath}
+
+\Green{Given $Y = g(X)$ and $X$'s PDF}
+\begin{displaymath}
+    \boxed{
+        \begin{aligned}
+            \mathbb{E}\left[Y\right] &= \sum_x g(x) \cdot \mathbb{P}(X = x) \\
+            \text{Var}(Y) &= \sum_x \left(g(x) - \mathbb{E}\left[g(X)\right]\right)^2 \cdot \mathbb{P}(X = x) \\
+        \end{aligned}
+    }
+\end{displaymath}
+
+\Red{RVs with only 2 outcomes} (not necessarily Bernoullis yet)
+Suppose RV $X$'s PDF is: $\begin{cases}
+    \mathbb{P}(X = a) &= p \\
+    \mathbb{P}(X = b) &= 1- p \\
+    \mathbb{P}(X = \text{all other values}) &= 0 \\
+\end{cases}$, then:
+\begin{displaymath}
+    \boxed{
+        \begin{aligned}
+            \mathbb{E}\left[X\right] &= ap + b(1-p) \\
+            \text{Var}(X) &= (a-b)^2p(1-p) \\
+            \text{SD}(X) &= |a-b| \sqrt{p (1-p)}
+        \end{aligned}
+    }
+\end{displaymath}
+
+\Red{Bernoulli Random Variable} aforementioned when $\begin{cases}
+    a &= 1 \\
+    b &= 0
+\end{cases}$.
+If \fbox{$X \sim \text{Bern(p)}$}, then:
+\begin{displaymath}
+    \boxed{
+        \begin{aligned}
+            \mathbb{E}\left[X\right] &= p \\
+            \text{Var}(X) &= p(1-p) \\
+            \text{SD}(X) &= \sqrt{p (1-p)}
+        \end{aligned}
+    }
+\end{displaymath}
+Useful for tracking \underline{how many} successes happen in $n$ independent trials.
+
+\Red{Binomial Problems} following must hold:
+\begin{enumerate}
+    \item Constant success probability $p$ and failure probability $(1-p)$.
+    \item Fixed total number of trials: $n$
+    \item trials are \underline{\textbf{independent}}
+    \item Only two outcomes of interest (success or failure) on each trial
+    \item \Hint{Want to find the probability of observing $k$ successes among the total number of $n$ trials}. (Order doesn't matter.)
+\end{enumerate}
+\fbox{$\mathbb{P}(k \text{ successes in } n \text{ trials}) = \binom{n}{k} p^k (1-p)^{n-k}$}
+
+\Blue{Combination} how many ways to choose $k$ out of $n$: \fbox{$\binom{n}{k} = \frac{n!}{k!(n-k!)}$}.
+
+\Red{Binomial Distribution} \fbox{$X \sim \text{Binom}(n, p)$} where $X$ is an RV tracking the number of successes in
+$n$ independent trials with success probability $p$. $X$'s PDF:
+\fbox{$\mathbb{P}(X = k) = \binom{n}{k} p^k (1-p)^{n-k}, \forall k \in \left\{0, \dots, n\right\}$}.
+\Hint{Attn: $X$ here is not for one single trial!}.
+\begin{itemize}
+    \item A \textbf{Bernoulli RV}: useful for one trial's success/failure.
+    \item A \textbf{Binomial RV}: useful for total number of successes.
+\end{itemize}
+\Blue{Binomial as the Sum of Bernoullis} $n$ independent Bernoulli RVs each with the same success probability $p$:
+$X_i \sim \text{Bern}(p), \forall i \in {1, \dots, n}$.
+Define \fbox{$S_n = \sum_{i=1}^{n} X_i$}, then denote \fbox{$S_n \sim \text{Binom}(n, p)$}.
+\Hint{$\text{Binom}(1, p) = \text{Bern}(p)$}
 
 \end{multicols}
 \end{document}
