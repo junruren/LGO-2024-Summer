@@ -263,5 +263,81 @@ $\forall i \in {1, \dots, n}, X_i \sim \text{Bern}(p)$.
 Define \fbox{$S_n = \sum_{i=1}^{n} X_i$}, then denote \fbox{$S_n \sim \text{Binom}(n, p)$}.
 \Hint{$\text{Binom}(1, p) = \text{Bern}(p)$}
 
+\Red{Joint Distribution of 2 RVs} the probability that 2 RVs simultaneously take on 2 values.
+$\forall x \in X, \forall y \in Y$ \fbox{$\mathbb{P}(X = x, Y = y)$}.
+
+\Green{Marginal probability distribution} can be found given with the joint PDF:
+\fbox{$\mathbb{P}(X = x) = \sum_{y} \mathbb{P}(X = x, Y = y)$}
+
+\Red{Z-Score of a Random Variable $X$}
+\fbox{$Z(X) = \frac{X - \mathbb{E}\left[X\right]}{SD(X)}$}
+
+\Hint{$\mathbb{E}\left[Z(X)\right] = 0$ and $SD(Z(X)) = 1$}
+
+\Red{Correlation Between RVs $X$ and $Y$} ``average of the product of z-scores''
+\begin{displaymath}
+    \boxed{
+        \begin{aligned}
+            \text{Corr}(X, Y) &= \mathbb{E}\left[Z(X) \cdot Z(Y)\right] \\
+            &= \frac{\text{Cov(X, Y)}}{SD(X) \cdot SD(Y)}
+        \end{aligned}
+    }
+\end{displaymath}
+\Hint{
+    \begin{itemize}
+        \item $\text{Corr}(X, Y)$ is unit-free.
+        \item $\text{Corr}(X, Y)$ doesn't exist if either $SD(X) = 0$ or $SD(Y) = 0$ (can't divide by 0!).
+    \end{itemize}
+}
+
+\Red{Covariance Between RVs $X$ and $Y$} ``average of the product of the centered variables''. Necessary for assessing variability of sums of RVs (e.g. portfolios).
+\begin{displaymath}
+    \boxed{
+        \begin{aligned}
+            \text{Cov}(X, Y) &= \mathbb{E}\left[\left(X - \mathbb{E}[X]\right)\left(Y - \mathbb{E}[Y]\right)\right] \\
+            &= \text{Corr}(X, Y) \cdot SD(X) \cdot SD(Y)
+        \end{aligned}
+    }
+\end{displaymath}
+\Hint{
+    \begin{itemize}
+        \item $\text{Cov}(X, Y)$ has funny units: product of the $X$ and $Y$ units.
+        \item $\text{Cov}(X, Y)$ always exists. If SDs are 0, $\text{Cov}(X, Y) = 0$
+        \item $\text{Cov}(X, X) = V(X)$
+    \end{itemize}
+}
+\Hint{If $SD(X) > 0$ and $SD(Y) > 0$, then $\text{Corr}(X, Y)$ and $\text{Cov}(X, Y)$ have the same sign.}
+
+\Green{Expected Value of $X + Y$} regardless of RVs $X$ and $Y$'s joint distribution:
+\fbox{$\mathbb{E}\left[X + Y\right] = \mathbb{E}\left[X\right] + \mathbb{E}\left[Y\right]$},
+\Hint{but this is not the case for Variance or SD.}
+
+\Green{Variance of $X + Y$}
+\begin{displaymath}
+    \boxed{
+        \begin{aligned}
+            &\text{Var}(X + Y) \\
+            =& \text{V}(X) + \text{V}(Y) + 2 \cdot \text{Cov}(X, Y)\\
+            =& \text{V}(X) + \text{V}(Y) + 2 \cdot \text{Corr}(X, Y) \cdot SD(X) \cdot SD(Y)
+        \end{aligned}
+    }
+\end{displaymath}
+\Hint{
+    \begin{itemize}
+        \item If $\text{Corr}(X, Y)$ increases, then $\text{Var}(X + Y)$ increases.
+        \item If $V(X) = V(Y)$, then $\text{Var}(X + Y)$ is maximized when $\text{Cov}(X, Y)$ is maximized.
+    \end{itemize}
+}
+
+
+\Green{Handy Transformations}
+\begin{displaymath}
+    \boxed{
+        \begin{aligned}
+            \text{Cov}\left(a + b X, c + d Y\right) &= b \cdot d \cdot \text{Cov}(X, Y) \\
+        \end{aligned}
+    }
+\end{displaymath}
+
 \end{multicols}
 \end{document}
