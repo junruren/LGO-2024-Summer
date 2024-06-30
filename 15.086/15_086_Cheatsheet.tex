@@ -292,7 +292,7 @@ $\forall x \in X, \forall y \in Y$ \fbox{$\mathbb{P}(X = x, Y = y)$}.
     \item Correlation is guaranteed to \Hint{lie between $+1$ (perfect positive correlation) and $-1$ (perfect negative
         correlation)}. Hence Corr is more commonly used than Covariance.
 \end{itemize}
-\includegraphics[width=0.24\textwidth]{correlation_examples.png}
+\includegraphics[width=0.25\textwidth]{correlation_examples.png}
 
 \Red{Covariance Between RVs $X$ and $Y$} ``average of the product of the centered variables''. Necessary for assessing variability of sums of RVs (e.g. portfolios).
 \begin{displaymath}
@@ -413,6 +413,88 @@ then as $n \rightarrow \infty$:
         \item $M_n$ will fall within $\mu \pm 3\frac{\sigma}{\sqrt{n}}$
     \end{itemize}
 \end{itemize}
+
+\section{Sampling and Confidence Intervals}
+
+\Red{Confidence Interval} contains an unknown (population) quantity at some specified sampling frequency.
+\begin{itemize}
+    \item Confidence intervals \Hint{do not} depend on population size, but only on sample size.
+    \item For a given sample size, can be very precise with low confidence or very imprecise with high confidence.
+    \item 2x the precision requires 4x sample size; 3x the precision requires 9x sample size.
+\end{itemize}
+
+Wording matters...
+\begin{itemize}
+    \item OK: ``I am 95\% confident the interval [a,b] contains the true population proportion''
+    \item OK: ``There is a 95\% probability the interval [a,b] contains the true population proportion''
+    \item Not OK: ``There is a 95\% probability the true population proportion lies in the interval [a,b]''
+\end{itemize}
+
+\Green{Confidence Level ($L$) to $c$}
+\fbox{$c = \texttt{qnorm}(p = \frac{(1 + L)}{2}, \mu = 0, \sigma = 1)$}
+(find the value $c$ such that the area under $\mathcal{N}(\mu, \sigma)$ is $p$)
+\begin{center}
+    \begin{tabular}{ c|c|c } 
+        confidence level & $L$ & $c$ \\ 
+        \hline
+        90\% & 0.9 & 1.65 \\ 
+        95\% & 0.95 & 1.96 \\ 
+        99\% & 0.99 & 2.58 \\ 
+    \end{tabular}
+\end{center}
+    
+\Blue{For a population \underline{mean}} Given sample size $n$, sample average $\bar{x}$, and sample standard deviation
+$s$, we are X\% confident the true population mean lies in the interval:
+\fbox{$\bar{x} \pm \left(c \frac{s}{\sqrt{n}}\right)$} ``MOE'': $\left(c \frac{s}{\sqrt{n}}\right)$
+
+\Blue{For a population \underline{proportion}} Given sample size $n$, sample proportion $\bar{p}$, and
+\Hint{standard deviation in the population to be $0.5$}, we are X\% confident the true population mean lies in the interval:
+\fbox{$\bar{p} \pm \left(c \frac{0.5}{\sqrt{n}}\right)$} ``MOE'': $\left(c \frac{0.5}{\sqrt{n}}\right)$
+
+\Hint{Important assumptions:}
+\begin{itemize}
+    \item Sample is random
+    \item Sample is large enough ($n > 30$) for CLT
+    \item The worst possible standard deviation in the population to be $0.5$
+\end{itemize}
+
+\Red{Sampling Distribution} is well approximated by
+$\mathcal{N}(\mu = \text{true population parameter}, \sigma = \frac{\text{population SD}}{\sqrt{n}})$, based on CLT.
+\includegraphics[width=0.253\textwidth]{standard_error.jpg}
+\includegraphics[width=0.253\textwidth]{proportions.jpg}
+
+\Blue{Sampling Errors} the sample-to-sample variations due to pure chance. MOE and confidence intervals quantify this
+uncertainty well.
+
+\Blue{Non-Sampling Errors} (some examples)
+\begin{itemize}
+    \item Selection Bias: happens when each member of the population does not have the same chance of being selected.
+    \item Response/Non-response Bias: happens when some fraction of the individuals surveyed don’t respond for reasons related to what’s being asked in the survey
+\end{itemize}
+
+\section{R Distribution Functions}
+    
+\begin{itemize}
+    \item \texttt{p} (``probability''): cumulative distribution function (“what is the probability above or below a cutoff?”)
+    \item \texttt{q} (``quantile''): inverse CDF (“what value do we find at, say, 80\% of the way to the maximal value?”)
+    \item \texttt{d} (``density''): density function (gives us the “height” or y-value of distribution for a particular z-score - mainly useful in plotting)
+\end{itemize}
+
+\lstset{breaklines=true}
+\begin{lstlisting}[language=R]
+# Exactly k successes in n trials given success probability p
+dbinom(k, size=n, p=p)
+# k or more successes in n trials given success probability p
+sum(dbinom(k:n, size=n, p=p))
+
+# Probability of this value or less
+pnorm(value, mean, sd)
+# Probability of this value or greater
+pnorm(value, mean, sd, lower.tail=FALSE)
+# Highest value associated with a given percentile
+qnorm(percentile, mean, sd)
+
+\end{lstlisting}
 
 \end{multicols}
 \end{document}
