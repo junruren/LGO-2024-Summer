@@ -87,12 +87,22 @@
     \boxed{
         \begin{aligned}
             \mathbb{E}\left[a + b X\right] &= a + b\mathbb{E}\left[X\right] \\
+            \mathbb{E}\left[X^2\right] &= \text{Var}(X) + \left(\mathbb{E}\left[X\right]\right)^2 \\
+            \text{\textit{(ditto but flipped) }} \text{Var}(X) &= \mathbb{E}\left[X^2\right] - \left(\mathbb{E}\left[X\right]\right)^2 \\
             \text{Var}(a + b X) &= b^2 \text{Var}(X) \\
             \text{SD}(a + b X) &= |b| \text{SD}(X) \\
             \text{Cov}\left(a + b X, c + d Y\right) &= b \cdot d \cdot \text{Cov}(X, Y) \\
         \end{aligned}
     }
 \end{displaymath}
+
+\Green{Uniform distribution facts from HW}
+\begin{enumerate}
+    \item If $U \sim \text{Unif}[0,1]$, then for any fixed $a > 0$ and $b \in \mathbb{R}$, we have that $aU+b \sim \text{Unif}[b,a+b]$.
+    \item If $U \sim \text{Unif}[0,1]$, then $\mathbb{E}[U] = \frac{1}{2}$ and $\text{Var}(U) = \frac{1}{12}$.
+\end{enumerate}
+
+\section{When I am not protected from me being me}
 
 Set Algebra:
 \begin{itemize}
@@ -222,7 +232,7 @@ Suppose RV $X$'s PDF is: $\begin{cases}
     a &= 1 \\
     b &= 0
 \end{cases}$.
-If \fbox{$X \sim \text{Bern(p)}$}, then:
+If \fbox{$X \sim \text{Bern}(p)$}, then:
 \begin{displaymath}
     \boxed{
         \begin{aligned}
@@ -239,6 +249,18 @@ If \fbox{$X \sim \text{Bern(p)}$}, then:
     \end{itemize}
 }
 Useful for tracking \underline{how many} successes happen in $n$ independent trials.
+
+\Red{Binomial Random Variable}
+If \fbox{$X \sim \text{Binom}(n, p)$}, then:
+\begin{displaymath}
+    \boxed{
+        \begin{aligned}
+            \mathbb{E}\left[X\right] &= n \cdot p \\
+            \text{Var}(X) &= n \cdot p(1-p) \\
+            \text{SD}(X) &= \sqrt{n \cdot p(1-p)}
+        \end{aligned}
+    }
+\end{displaymath}
 
 \Red{Binomial Problems} following must hold:
 \begin{enumerate}
@@ -275,6 +297,8 @@ $\forall x \in X, \forall y \in Y$ \fbox{$\mathbb{P}(X = x, Y = y)$}.
 \fbox{$Z(X) = \frac{X - \mathbb{E}\left[X\right]}{SD(X)}$}
 
 \Hint{$\mathbb{E}\left[Z(X)\right] = 0$ and $SD(Z(X)) = 1$}
+
+\section{Correlation and Covariance}
 
 \Red{Correlation Between RVs $X$ and $Y$} ``average of the product of z-scores''
 \begin{displaymath}
@@ -461,6 +485,8 @@ $s$, we are X\% confident the true population mean lies in the interval:
 \Red{Sampling Distribution} is well approximated by
 $\mathcal{N}(\mu = \text{true population parameter}, \sigma = \frac{\text{population SD}}{\sqrt{n}})$, based on CLT.
 \includegraphics[width=0.253\textwidth]{standard_error.jpg}
+\Hint{Take away:} assuming a conservative confidence interval based on $0.5$ is \underline{not} the only way!
+Can estimate standard error using the surveyed proportion too.
 \includegraphics[width=0.253\textwidth]{proportions.jpg}
 
 \Blue{Sampling Errors} the sample-to-sample variations due to pure chance. MOE and confidence intervals quantify this
