@@ -82,6 +82,18 @@
 \setlength{\multicolsep}{1pt}
 \setlength{\columnsep}{2pt}
 
+\Green{Handy Transformations}
+\begin{displaymath}
+    \boxed{
+        \begin{aligned}
+            \mathbb{E}\left[a + b X\right] &= a + b\mathbb{E}\left[X\right] \\
+            \text{Var}(a + b X) &= b^2 \text{Var}(X) \\
+            \text{SD}(a + b X) &= |b| \text{SD}(X) \\
+            \text{Cov}\left(a + b X, c + d Y\right) &= b \cdot d \cdot \text{Cov}(X, Y) \\
+        \end{aligned}
+    }
+\end{displaymath}
+
 Set Algebra:
 \begin{itemize}
     \item \Blue{Union} $A$ or $B$; $A \cup B$.
@@ -180,17 +192,6 @@ a \underline{Discrete} random variable:
 
 \Red{Standard Deviation} \fbox{$\text{SD}(X) = \sqrt{\text{Var}(X)}$}
 
-\Green{Handy Transformations}
-\begin{displaymath}
-    \boxed{
-        \begin{aligned}
-            \mathbb{E}\left[a + b X\right] &= a + b\mathbb{E}\left[X\right] \\
-            \text{Var}(a + b X) &= b^2 \text{Var}(X) \\
-            \text{SD}(a + b X) &= |b| \text{SD}(X)
-        \end{aligned}
-    }
-\end{displaymath}
-
 \Green{Given $Y = g(X)$ and $X$'s PDF}
 \begin{displaymath}
     \boxed{
@@ -284,14 +285,13 @@ $\forall x \in X, \forall y \in Y$ \fbox{$\mathbb{P}(X = x, Y = y)$}.
         \end{aligned}
     }
 \end{displaymath}
-\Hint{
-    \begin{itemize}
-        \item $\text{Corr}(X, Y)$ is unit-free.
-        \item $\text{Corr}(X, Y)$ doesn't exist if either $SD(X) = 0$ or $SD(Y) = 0$ (can't divide by 0!).
-        \item Correlation is guaranteed to lie between $+1$ (perfect positive correlation) and $-1$ (perfect negative
-            correlation). Hence Corr is more commonly used than Covariance.
-    \end{itemize}
-}
+
+\begin{itemize}
+    \item $\text{Corr}(X, Y)$ is unit-free.
+    \item \Hint{$\text{Corr}(X, Y)$ doesn't exist if either $SD(X) = 0$ or $SD(Y) = 0$} (can't divide by 0!).
+    \item Correlation is guaranteed to \Hint{lie between $+1$ (perfect positive correlation) and $-1$ (perfect negative
+        correlation)}. Hence Corr is more commonly used than Covariance.
+\end{itemize}
 \includegraphics[width=0.24\textwidth]{correlation_examples.png}
 
 \Red{Covariance Between RVs $X$ and $Y$} ``average of the product of the centered variables''. Necessary for assessing variability of sums of RVs (e.g. portfolios).
@@ -303,29 +303,36 @@ $\forall x \in X, \forall y \in Y$ \fbox{$\mathbb{P}(X = x, Y = y)$}.
         \end{aligned}
     }
 \end{displaymath}
-\Hint{
-    \begin{itemize}
-        \item $\text{Cov}(X, Y)$ has funny units: product of the $X$ and $Y$ units.
-        \item $\text{Cov}(X, Y)$ always exists. If SDs are 0, $\text{Cov}(X, Y) = 0$
-        \item $\text{Cov}(X, X) = V(X)$
-    \end{itemize}
-}
-\Hint{If $SD(X) > 0$ and $SD(Y) > 0$, then $\text{Corr}(X, Y)$ and $\text{Cov}(X, Y)$ have the same sign.}
+\begin{itemize}
+    \item $\text{Cov}(X, Y)$ has funny units: product of the $X$ and $Y$ units.
+    \item \Hint{$\text{Cov}(X, Y)$ always exists.} If SDs are 0, $\text{Cov}(X, Y) = 0$
+    \item $\text{Cov}(X, X) = V(X)$
+    \item \Hint{If $SD(X) > 0$ and $SD(Y) > 0$, then $\text{Corr}(X, Y)$ and $\text{Cov}(X, Y)$ have the same sign.}
+\end{itemize}
 
-\Green{Expected Value of $X + Y$} regardless of RVs $X$ and $Y$'s joint distribution:
-\fbox{$\mathbb{E}\left[X + Y\right] = \mathbb{E}\left[X\right] + \mathbb{E}\left[Y\right]$},
-\Hint{but this is not the case for Variance or SD.}
-
-\Green{Variance of $X + Y$}
+\Green{Expected Value of RVs summed} is regardless of RVs' joint distribution:
 \begin{displaymath}
     \boxed{
         \begin{aligned}
-            &\text{Var}(X + Y) \\
-            =& \text{V}(X) + \text{V}(Y) + 2 \cdot \text{Cov}(X, Y)\\
-            =& \text{V}(X) + \text{V}(Y) + 2 \cdot \text{Corr}(X, Y) \cdot SD(X) \cdot SD(Y)
+            &\mathbb{E}\left[X + Y\right] = \mathbb{E}\left[X\right] + \mathbb{E}\left[Y\right] \\
+            &\mathbb{E}\left[X + Y + W\right] = \mathbb{E}\left[X\right] + \mathbb{E}\left[Y\right] + \mathbb{E}\left[W\right] \\
+            &\mathbb{E}\left[\sum_{i=1}^{n} X_i\right] = \sum_{i=1}^{n} \mathbb{E}\left[X_i\right] = \mathbb{E}\left[X_i\right] + \dots + \mathbb{E}\left[X_n\right]\\
         \end{aligned}
     }
 \end{displaymath}
+
+\Green{Variance of of RVs summed}
+\begin{displaymath}
+    \boxed{
+        \begin{aligned}
+            &\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y) + 2 \text{Cov}(X, Y) \\
+            &\text{Var}(X + Y + W) = \text{Var}(X) + \text{Var}(Y) + \text{Var}(W) \\
+            &+ 2 \text{Cov}(X, Y) + 2 \text{Cov}(X, W) + 2 \text{Cov}(Y, W) \\
+            &\text{Var}\left(\sum_{i=1}^{n} X_i\right) = \sum_{i=1}^{n} \text{Var}\left(X_i\right) + 2 \sum_{i < j} \text{Cov}(X_i, X_j)
+        \end{aligned}
+    }
+\end{displaymath}
+Have to consider the covariance of all possible pairs: $X_i$ and $X_j$.
 \Hint{
     \begin{itemize}
         \item If $\text{Corr}(X, Y)$ increases, then $\text{Var}(X + Y)$ increases.
@@ -333,14 +340,79 @@ $\forall x \in X, \forall y \in Y$ \fbox{$\mathbb{P}(X = x, Y = y)$}.
     \end{itemize}
 }
 
-\Green{Handy Transformations}
+\Blue{\underline{Uncorrelated} RVs} if $\text{Corr}(X, Y) = 0$.
+Equivalently, they are uncorrelated if $\text{Cov}(X,Y) = 0, SD(X) > 0, SD(Y) > 0$
+
+\Green{Variance of of \underline{Uncorrelated} or \underline{Independent} RVs summed}
 \begin{displaymath}
     \boxed{
         \begin{aligned}
-            \text{Cov}\left(a + b X, c + d Y\right) &= b \cdot d \cdot \text{Cov}(X, Y) \\
+            \text{Var}(X + Y) &= \text{Var}(X) + \text{Var}(Y) \\
+            \text{Var}\left(\sum_{i=1}^{n} X_i\right) &= \sum_{i=1}^{n} \text{Var}\left(X_i\right)
         \end{aligned}
     }
 \end{displaymath}
+No change in expected value's formula.
+
+\Blue{\underline{Independent} RVs}
+\fbox{$\forall x, y, \mathbb{P}(X = x, Y = y) = \mathbb{P}(X = x)\mathbb{P}(Y = y)$}
+
+\Hint{Independence implies uncorrelatedness}: if two RVs $X$ and $Y$ are independent, then they are uncorrelated.
+\fbox{$\text{Independence} \Rightarrow \text{Corr}(X, Y) = 0 = \text{Cov}(X, Y)$}
+\Hint{But uncorrelated RVs \underline{can} be dependent!}
+
+\Red{\textit{(iid)} Independent and Identically Distributed RVs}
+for a collection of \textit{iid} RVs $\left\{X_1, \dots, X_n\right\}$:
+$\forall i \in \{1, \dots, n\}$
+\begin{displaymath}
+    \boxed{
+        \begin{aligned}
+            \mathbb{E}[X_i] &= \mu \\
+            \text{Var}(X_i) &= \sigma^2 \\
+            \text{SD}(X_i) &= \sigma
+        \end{aligned}
+    }
+\end{displaymath}
+
+\Blue{Sum of \textit{iid} RVs} $S_n = X_1 + \dots + X_n$:
+\begin{displaymath}
+    \boxed{
+        \begin{aligned}
+            \mathbb{E}[S_n] &= n \cdot \mu \\
+            \text{Var}(S_n) &= n \cdot \sigma^2 \\
+            \text{SD}(X_i) &= \sqrt{n} \cdot \sigma
+        \end{aligned}
+    }
+\end{displaymath}
+
+\section{Central Limit Theorem (CLT)}
+\textbf{If $\left\{X_1, \dots, X_n\right\}$ are \textit{iid} with expected value $\mathbb{E}[X_i] = \mu$ and variance $\text{Var}(X_i) = \sigma^2 < \infty$},
+then as $n \rightarrow \infty$:
+\begin{itemize}
+    \item $S_n \sim \mathcal{N}(n \cdot \mu, \sqrt{n} \cdot \sigma)$
+    \item $\text{Mean}_n \sim \mathcal{N}(\mu, \frac{\sigma}{\sqrt{n}})$
+\end{itemize}
+\Hint{If $n$ is large enough (heuristic: \underline{$n > 30$}), we can calculate probabilities for the sum and mean of RVs by using the normal distribution.}
+
+\Green{Emperical Rules under CLT}
+\begin{itemize}
+    \item 50\% of the time,\begin{itemize}
+        \item $S_n$ will fall within $n\mu \pm \frac{2}{3}\sqrt{n} \sigma$
+        \item $M_n$ will fall within $\mu \pm \frac{2}{3}\frac{\sigma}{\sqrt{n}}$
+    \end{itemize}
+    \item 68\% of the time,\begin{itemize}
+        \item $S_n$ will fall within $n\mu \pm \sqrt{n} \sigma$
+        \item $M_n$ will fall within $\mu \pm \frac{\sigma}{\sqrt{n}}$
+    \end{itemize}
+    \item 95\% of the time,\begin{itemize}
+        \item $S_n$ will fall within $n\mu \pm 2\sqrt{n} \sigma$
+        \item $M_n$ will fall within $\mu \pm 2\frac{\sigma}{\sqrt{n}}$
+    \end{itemize}
+    \item 99.7\% of the time,\begin{itemize}
+        \item $S_n$ will fall within $n\mu \pm 3\sqrt{n} \sigma$
+        \item $M_n$ will fall within $\mu \pm 3\frac{\sigma}{\sqrt{n}}$
+    \end{itemize}
+\end{itemize}
 
 \end{multicols}
 \end{document}
