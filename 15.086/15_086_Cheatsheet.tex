@@ -3,6 +3,7 @@
 \usepackage{calc}
 \usepackage{ifthen}
 \usepackage[landscape]{geometry}
+\usepackage{listings}
 \usepackage{amsmath,amsthm,amsfonts,amssymb}
 \usepackage{mathtools}
 \usepackage{color,graphicx,overpic}
@@ -287,8 +288,11 @@ $\forall x \in X, \forall y \in Y$ \fbox{$\mathbb{P}(X = x, Y = y)$}.
     \begin{itemize}
         \item $\text{Corr}(X, Y)$ is unit-free.
         \item $\text{Corr}(X, Y)$ doesn't exist if either $SD(X) = 0$ or $SD(Y) = 0$ (can't divide by 0!).
+        \item Correlation is guaranteed to lie between $+1$ (perfect positive correlation) and $-1$ (perfect negative
+            correlation). Hence Corr is more commonly used than Covariance.
     \end{itemize}
 }
+\includegraphics[width=0.24\textwidth]{correlation_examples.png}
 
 \Red{Covariance Between RVs $X$ and $Y$} ``average of the product of the centered variables''. Necessary for assessing variability of sums of RVs (e.g. portfolios).
 \begin{displaymath}
@@ -328,7 +332,6 @@ $\forall x \in X, \forall y \in Y$ \fbox{$\mathbb{P}(X = x, Y = y)$}.
         \item If $V(X) = V(Y)$, then $\text{Var}(X + Y)$ is maximized when $\text{Cov}(X, Y)$ is maximized.
     \end{itemize}
 }
-
 
 \Green{Handy Transformations}
 \begin{displaymath}
