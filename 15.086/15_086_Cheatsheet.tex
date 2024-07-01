@@ -512,20 +512,36 @@ uncertainty well.
     \item \texttt{d} (``density''): density function (gives us the “height” or y-value of distribution for a particular z-score - mainly useful in plotting)
 \end{itemize}
 
+\Red{\texttt{pnorm}} returns the integral (a.k.a. ``area under the curve'') from $-\infty$ to \texttt{q} of the pdf of the
+normal distribution where \texttt{q} is a Z-score
 \lstset{breaklines=true}
+\begin{lstlisting}[language=R]
+# Probability of this value or less
+pnorm(value, mean, sd)
+# Probability of this value or greater
+pnorm(value, mean, sd, lower.tail=FALSE)
+\end{lstlisting}
+If \texttt{lower.tail} is set equal to \texttt{FALSE} then \texttt{pnorm} returns the integral from \texttt{q} to
+$\infty$ of the pdf of the normal distribution. Note that \texttt{pnorm(q)} is the same as
+\texttt{1 - pnorm(q, lower.tail = FALSE)}
+
+\includegraphics[width=0.25\textwidth]{qnorm.jpg}
+
+\Red{\texttt{qnorm}} simply the inverse of the cdf, which you can also think of as the inverse of pnorm! You can use
+\texttt{qnorm} to determine the answer to the question: What is the Z-score of the \texttt{p}-th quantile of the normal
+distribution?
+
+\begin{lstlisting}[language=R]
+# Highest value associated with a given percentile
+qnorm(percentile, mean, sd)
+\end{lstlisting}
+
+\Blue{Binomial functions} unlikely tested but why not.
 \begin{lstlisting}[language=R]
 # Exactly k successes in n trials given success probability p
 dbinom(k, size=n, p=p)
 # k or more successes in n trials given success probability p
 sum(dbinom(k:n, size=n, p=p))
-
-# Probability of this value or less
-pnorm(value, mean, sd)
-# Probability of this value or greater
-pnorm(value, mean, sd, lower.tail=FALSE)
-# Highest value associated with a given percentile
-qnorm(percentile, mean, sd)
-
 \end{lstlisting}
 
 \end{multicols}
