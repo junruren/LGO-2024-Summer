@@ -317,6 +317,11 @@ $\forall x \in X, \forall y \in Y$ \fbox{$\mathbb{P}(X = x, Y = y)$}.
     \item Correlation is guaranteed to \Hint{lie between $+1$ (perfect positive correlation) and $-1$ (perfect negative
         correlation)}. Hence Corr is more commonly used than Covariance.
 \end{itemize}
+
+$\text{Corr}(X, Y)$ here quantifies the strength and direction of the \textbf{\Hint{linear relationship}} between two
+variables. Therefore, if two variables have a strong but non-linear relationship, $\text{Corr}(X, Y) \approx 0$,
+indicating no linear correlation, even though a strong non-linear relationship exists.
+
 \includegraphics[width=0.25\textwidth]{correlation_examples.png}
 
 \Red{Covariance Between RVs $X$ and $Y$} ``average of the product of the centered variables''. Necessary for assessing variability of sums of RVs (e.g. portfolios).
