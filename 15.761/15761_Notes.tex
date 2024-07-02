@@ -1,0 +1,76 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{ 15.761 Introduction to Operations Management }
+\author{ Junru Ren }
+\date{\today}
+
+\begin{document}
+\maketitle	
+
+\section{Little's Law}
+
+\begin{equation}
+    L = \lambda W
+\end{equation}
+
+\begin{itemize}
+    \item $L$: number of jobs in the process
+    \item $\lambda$: job arrival rate
+    \item $W$: average time each job spend in the process
+\end{itemize}
+
+\textbf{Caution}: watch out for unit conversion, especially time-related units.
+
+\section{Queuing Analysis}
+
+\subsection{Setup}
+
+\begin{itemize}
+    \item $A$: time between successive job arrivals (a.k.a ``interarrival time'')
+    \item TODO
+\end{itemize}
+
+\subsection{Capacity utilization $\rho$}
+
+\begin{equation}
+    \rho = \frac{\lambda}{N \mu}
+\end{equation}
+
+\begin{itemize}
+    \item $\lambda$: job arrival rate
+    \item $N$: number of servers
+    \item $\mu$: a server's expected service rate, which is the inverse of the average service time $\bar{S}$ \begin{equation}
+        \mu = \frac{1}{\bar{S}}
+    \end{equation}
+\end{itemize}
+
+\subsection{Coefficient of variation of the interarrival time $CV_S$}
+
+\begin{equation}
+    CV_S = TODO
+\end{equation}
+
+\subsection{Coefficient of variation of the service time $CV_A$}
+
+\begin{equation}
+    CV_A = TODO
+\end{equation}
+
+\subsection{Expected number of jobs in the queue $L_q$}
+
+\begin{equation}
+    L_q = \frac{\rho^{\sqrt{2(N + 1)}}}{1 - \rho} \frac{C_A^2 + C_S^2}{2}
+\end{equation}
+
+\end{document}
