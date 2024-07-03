@@ -21,6 +21,22 @@
 
 \section{Process Flow Analysis}
 
+\subsection{Process flow diagram}
+
+Attention!
+\begin{itemize}
+    \item Always a good idea to sketch out a diagram even if not asked for
+    \item Label the resources. e.g. cashier / barista / Christian / Marisa with dashed boxes
+    \item Label all the final outcomes
+    \item Be consistent with the time unit: hours vs minutes, stick to one
+    \item Differentiate ``average rate'' vs ``average time duration'' provided for each step: one is the inverse of another
+    \item You can depart more than the arrival: \begin{itemize}
+        \item Arrival rate of a later step is $min\left[\lambda_{\text{previous step}}, \left(N_{\text{previous step}} \cdot \mu_{\text{previous step}}\right)\right]$
+        \item Depart rate of the current step is $min\left[\lambda, N \cdot \mu\right]$
+    \end{itemize}
+    \item When interpreting a drawn diagram be \textbf{careful with \fbox{change of the ``perspective''.}} e.g. diagram may reflect the flow of a patient but we may need to change to a doctor's perspective
+\end{itemize}
+
 \subsection{Throughput time}
 
 The time that elapses from when the job starts the process to the time it ends the process.
