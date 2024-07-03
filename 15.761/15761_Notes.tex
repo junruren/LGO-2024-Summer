@@ -2,6 +2,7 @@
 
 \usepackage{sectsty}
 \usepackage{graphicx}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
 
 % Margins
 \topmargin=-0.45in
@@ -18,19 +19,102 @@
 \begin{document}
 \maketitle	
 
-\section{Little's Law}
+\section{Process Flow Analysis}
+
+\subsection{Throughput time}
+
+The time that elapses from when the job starts the process to the time it ends the process.
+
+\subsection{Little's Law}
+
+The only law in operations management.
 
 \begin{equation}
     L = \lambda W
 \end{equation}
 
 \begin{itemize}
-    \item $L$: number of jobs in the process
-    \item $\lambda$: job arrival rate
-    \item $W$: average time each job spend in the process
+    \item $L$: average number of jobs in system
+    \item $\lambda$: average job arrival rate
+    \item $W$: average throughput time / average time each job spend in the process
 \end{itemize}
 
 \textbf{Caution}: watch out for unit conversion, especially time-related units.
+
+
+\section{Capacity}
+
+\begin{equation}
+    \text{capacity utilization} = \frac{\text{capacity required}}{\text{capacity available}}
+\end{equation}
+
+Three ways to change capacity utilization:
+
+\begin{enumerate}
+    \item Increase resources: maintain speed but add time available or add resources
+    \item Work faster: in same amount of time
+    \item Shift demand
+\end{enumerate}
+
+If we need to distinct peak and non-peak times instead of just looking at the average behavior, simply break the time
+interval into two time intervals: peak and non-peak.
+
+\subsection{Capacity measured in terms of units}
+
+\begin{equation}
+    \text{capacity required} = \text{\# of jobs}
+\end{equation}
+
+\begin{equation}
+    \text{capacity available} = \frac{\text{time available}}{\text{cycle time}}
+\end{equation}
+
+\subsection{Capacity measured in terms of time}
+
+\begin{equation}
+    \text{capacity required} = (\text{\# of jobs})(\text{cycle time})
+\end{equation}
+
+\begin{equation}
+    \text{capacity available} = \text{time available}
+\end{equation}
+
+\subsection{Adjusted for start-up}
+
+\begin{equation}
+    \text{capacity available} = \frac{\text{time available} - \text{throughput time}}{\text{cycle time}} + 1
+\end{equation}
+
+If looking for the number of ``whole'' units can be made, round \textbf{down} to the nearest whole number.
+
+\section{Congestion Analysis}
+
+\subsection{Deterministic variability - inventory buildup diagrams}
+
+The balance equation:
+
+\begin{equation}
+    \begin{split}
+    \left(\text{\# of jobs in system at end of period}\right) =& \left(\text{\# of jobs \textbf{in} system at start of period}\right) \\
+    &+ \left(\text{\# of jobs \textbf{arriving} to system during period}\right) \\
+    &- \left(\text{\# of jobs serviced (departed system) during period}\right)
+    \end{split}
+\end{equation}
+
+Can replace ``system'' with ``queue'' or ``service''.
+
+\begin{equation}
+    \text{buildup rate} = \text{arrival rate} - \text{departure rate}
+\end{equation}
+
+Buildup rate can be negative if there is inventory being worked off. Otherwise, the departure rate cannot exceed the
+arrival rate.
+
+\begin{equation}
+    \text{average inventory} = \frac{\text{\textbf{area} under the inventory buildup curve}}{\text{total time interval}}
+\end{equation}
+
+Also applicable to average queue size if the ``inventory'' is considered as jobs waiting in a queue.
 
 \section{Queuing Analysis}
 
