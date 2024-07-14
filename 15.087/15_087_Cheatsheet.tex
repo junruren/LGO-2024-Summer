@@ -207,7 +207,9 @@ The model's ability to predict the future and its interpretability can be impair
 
 \Blue{\underline{Irrelevant} variables} have large p-values. Smaller p-value (R: \texttt{Pr(>|t|)}), the better. If
 \Hint{lower than 0.05}, consider it \Hint{significant} at the 5\% significance level; otherwise, consider it
-non-significant at the 5\% significance level. In R, count \texttt{*}
+non-significant at the 5\% significance level. In R, a variable with \Hint{one or more \texttt{*} is considered
+significant at 5\% level. A variable not significant at the 5\% level but at the 10\% level can be stated as ``less
+clear''.}
 
 \Green{p-value of a variable $x_i$} the probability of observing a coefficient estimate as extreme, or more extreme,
 than the one actually obtained by the regression run in a similar sample \underline{assuming} $\beta_i = 0$.
@@ -249,6 +251,10 @@ variables and \underline{running the linear regression \textbf{again}}.
     \item Coefficients should ``make sense''.
     \item Use for interpolation rather than extrapolation.
 \end{itemize}
+
+\Blue{Inferring model's coefficient} from the practice: ``Correlation is not the same as causation. It could be that
+individuals with other contributing factors happen to sleep longer. It could be that these other factors, not sleep per
+se, are causally linked to the condition under study.''
 
 \Red{Technical caution} for the p-value to be correct, the ``unaccounted for'' differences in the regression model
 $\epsilon$ (think of the residuals) needs to have zero mean, constant standard deviation, be independent and follow a normal distribution.
