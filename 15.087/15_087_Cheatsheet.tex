@@ -9,6 +9,7 @@
 \usepackage{color,graphicx,overpic}
 \usepackage{hyperref}
 \usepackage[dvipsnames]{xcolor}
+\usepackage[T1]{fontenc}
 
 \usepackage{MnSymbol}
 \usepackage{graphicx}
@@ -66,6 +67,9 @@
 \newcommand{\Red}[1]{\noindent{\textbf{\textcolor{BrickRed}{#1 -}}}}
 \newcommand{\Green}[1]{\noindent{\textbf{\textcolor{PineGreen}{#1 -}}}}
 \newcommand{\Hint}[1]{\noindent{\textcolor{Orange}{#1}}}
+
+\lstset{breaklines=true}
+\lstset{upquote=true}
 % -----------------------------------------------------------------------
 
 \begin{document}
@@ -82,6 +86,21 @@
 \setlength{\multicolsep}{1pt}
 \setlength{\columnsep}{2pt}
 
+\Hint{Remember the T-Rex: Go beyond the summary statistics!}
+
+\includegraphics[width=0.20\textwidth]{trex.jpg}
+
+\section{Fitting Distributions}
+
+\begin{enumerate}
+    \item Collect data whose patterns are believed similar to the distribution of the random variable of interest.
+    \item Postulate one (or more) candidate probability distributions (e.g., normal (R: \texttt{"norm"}), lognormal (R: \texttt{"lnorm"}), uniform (R: \texttt{"unif"})\dots)
+    \item Fit the postulated distribution to the data: finding values of the parameters that best fit the data. Two methods: Moment Matching (R: \texttt{"mme"}) and Maximum Likelihood Estimation Method (R: \texttt{"mle"})\begin{lstlisting}[language=R]
+model <- fitdist(df, "norm", method="mme")\end{lstlisting}
+    \item Evaluate candidate distributions using goodness-of-fit. E.g., \Green{Akaike Information Criterion (AIC)} smaller the better.
+    \item Tweak the distributions if necessary to account for any data limitations rendering the past not quite representative of the future.
+\end{enumerate}
+
 \section{Linear Regression}
 
 Linear regression means the dependent variable is \Hint{linear in the model coefficients}.
@@ -92,8 +111,6 @@ Linear regression means the dependent variable is \Hint{linear in the model coef
 \end{itemize}
 
 \subsection{\texttt{lm} in R}
-
-\lstset{breaklines=true}
 
 Rentals as a function of temperature and humidity:
 
@@ -267,6 +284,129 @@ Top-right: hetero. Bottom-right:homo.
 \Green{Normality} the residuals are approximately normal.
 \includegraphics[width=0.25\textwidth]{residuals2.jpg}
 
+\section{Clustering}
+
+\Blue{$k$-means} with initial centroids $\mu_1,\dots,\mu_K \in \mathbb{R}^n$ (usually randomly selected),
+repeat until convergence:
+assign each point $i=1,\dots,n$ \fbox{$z_i \leftarrow \arg \min_{k=1,\dots,K}||\phi(s_i) - \mu_k||^2$}
+and then recenter each cluster $k=1,\dots,K$
+\fbox{$\mu_k \leftarrow \frac{\text{all points in this cluster sumed}}{\text{\# points in this cluster}}$}.
+$k$-means is guaranteed to converge to a local (not global) optima even with
+random initialization of centroids. Solution: run multiple times with different
+random init or init with heuristic.
+
+\Green{$k$-means objective func}
+\fbox{$\text{L}_{k\text{-means}}(z,\mu) = \sum_{i=1}^{n}||\phi(x_i) - \mu_{z_i}||^2$}
+
+\Green{Works the best} when clusters have ``round shape''.
+
+\begin{lstlisting}[language=R]
+set.seed(123)
+# k = 2
+# nstart = 100 is usually a good choice
+my_clustering <- kmeans(df, centers=2, nstart=100)
+my_clustering$centers # Show centers
+df <- mutate(df, cluster=my_clustering$cluster) # Label the cluster assignments
+\end{lstlisting}
+
+\Blue{Scree Plot} to help choosing $k$ value by displaying the tradeoff between number of clusters $k$ and the
+within-cluster sum of squared distances. \Hint{As $k$ increases, this value should decrease.}
+\includegraphics[width=0.24\textwidth]{scree.jpg}
+If SSD decreases very slowly as we add more clusters, this dataset isn't cluster-able.
+
+\section{Classification}
+
+\Red{Why not Linear Regression?} (1) Predicted $y$ can be negative or more than 1.0; (2) hard to interpret coefficients
+and hard to assess variable significance using \texttt{*}s.
+
+\Red{Logistic Regression} a sigmoid function to help.
+\includegraphics[width=0.24\textwidth]{sigmoid.jpg}
+
+\subsection{\texttt{glm} (generalized linear model) in R}
+
+\begin{lstlisting}[language=R]
+mod <- glm(data = train, default ~ ., family="binomial")
+\end{lstlisting}
+
+Binary classification, not multi-class.
+
+\subsection{Confusion Matrix}
+\includegraphics[width=0.24\textwidth]{confusion_matrix.jpg}
+
+Usually a trained classification model can be compared with a baseline model that always predicts the most common
+outcome.
+
+Accuracy/error rate isn't enough: as long as TP and TN adds to the same number, accuracy won't change assuming that all
+errors are equally important. To mitigate, add in financial considerations.
+
+\Green{True Positive Rate} i.e., sensitivity or \textbf{recall}. \fbox{$\text{TPR} = \frac{TP}{TP + FN}$} $\text{TPR} + \text{FNR} = 1$
+
+\Green{True Negative Rate} i.e., specificity. \fbox{$\text{TNR} = \frac{TN}{TN + FP}$} $\text{TNR} + \text{FPR} = 1$
+
+\begin{itemize}
+    \item TPR and FPR cannot be chosen independently.
+    \item If a cutoff chosen improves FPR, TPR will be adversely affected and vice-versa.
+\end{itemize}
+
+\Red{ROC Curve} receiver operating characteristic, captures the trade-off between FPR and TPR as the cutoff is varied.
+\Hint{\begin{enumerate}
+    \item Identify the more expensive type of error (FN or FP)
+    \item Decide on the max you are willing to tolerate that type of error
+    \item Use the ROC curve to pick the cutoff
+\end{enumerate}}
+
+\Red{Area Under the ROC Curve} in general, models with \Hint{higher AUC are preferable}.
+
+\section{CART}
+
+\begin{enumerate}
+    \item For each independent variable and each possible way to split the dataset based on that variable, calculate the impurity (reduction in overall SSR)
+    \item Choose the split (\Hint{independent variable to split on + the cutoff value to split at}) that has the max reduction in SSR and split the dataset into two accordingly
+    \item Repeat
+\end{enumerate}
+
+\Hint{CART models can be used for both a categorical dependent variable and continuous dependent variable.}
+
+\begin{lstlisting}[language=R]
+mdl <- rpart(data=train, default ~ installment + fico_score, minbucket=value, cp=value)
+prp(mdl) # Visualize
+predict(mdl, newdata=test)
+\end{lstlisting}
+
+\Red{\texttt{minsplit}} the minimum number of observations that must exist in a node in order for a split to be attempted.
+
+\Red{\texttt{minbucket}} the minimum number of observations in any terminal node. If only one of \texttt{minbucket} or
+\texttt{minsplit} is specified, the code either sets \texttt{minsplit} to \texttt{minbucket*3} or \texttt{minbucket} to
+\texttt{minsplit/3}, as appropriate. \Hint{Smaller \texttt{minbucket}, more splits in the final tree.}
+
+\Red{\texttt{cp} complexity parameter} Any split that does not decrease the overall lack of fit by a factor of cp is not attempted. For instance, with anova splitting, this means that the overall R-
+squared must increase by cp at each step. The main role of this parameter is to save computing time by pruning off
+splits that are obviously not worthwhile. Essentially, the user informs the program that any split which does not
+improve the fit by cp is not of interest, and that hence the program need not pursue it
+\Hint{Smaller \texttt{cp}, more layers (more underlying splits in the final tree).}
+
+\Green{Advantages of CART}
+\begin{itemize}
+    \item Can discover interactions between variables without explicitly incorporating interaction terms
+    \item Can learn nonlinear patterns
+    \item May mirror human decision making processes
+    \item Decision Rule is highly transparent: A series of if/else statements.Even simpler than linear regression. Can be explained to non-experts
+\end{itemize}
+
+\Red{Limiations of CART}
+\begin{itemize}
+    \item CART predictions lack smoothness
+    \item CART models may exhibit instability
+    \item May not lead to the strongest out-of-sample predictive performance
+\end{itemize}
+
+\Hint{Exam Cautions}: Watch out what the leaf nodes represent and what the question asks for: could be two opposite.
+
+\subsection{Cross-Validation}
+\Blue{Goal} finding the values of \texttt{minbucket} and \texttt{cp}.
+k-fold Cross-validation:
+\includegraphics[width=0.25\textwidth]{kfold.jpg}
+\texttt{minbucket} is usually fixed throughout the cross-validation.
 
 \section{Side bar}
 
