@@ -173,4 +173,181 @@ Also applicable to average queue size if the ``inventory'' is considered as jobs
     L_q = \frac{\rho^{\sqrt{2(N + 1)}}}{1 - \rho} \frac{C_A^2 + C_S^2}{2}
 \end{equation}
 
+\noindent\rule[0.5ex]{\linewidth}{1pt}
+
+Midterm exam until here.
+
+\noindent\rule[0.5ex]{\linewidth}{1pt}
+
+\newpage
+
+\section{Exam Cautions}
+
+\begin{itemize}
+    \item Draw a supply chain graph clearly showing:\begin{itemize}
+        \item the producer
+        \item the distributor
+        \item the retailer
+        \item the customer
+    \end{itemize}
+    \item Fathom, the ``seller'' and ``buyer'' roles are relative to which stage in the supply chain?
+\end{itemize}
+
+\section{Newsvendor Inventory Model}
+
+\textbf{Goal:} Find the optimal order quantity $Q^*$, that only be placed once, based on:
+
+\begin{itemize}
+    \item \textbf{purchase cost $c$}: each unit's cost
+    \item \textbf{sales price $p$}: each unit's sold price
+    \item \textbf{salvage value $s$}: each unit's salvage price; if each unsold unit incurs a disposal cost, the value is \fbox{negative}.
+    \item Assume: $p > c > s$
+\end{itemize}
+
+\subsection{Two ``costs'' needed to know}
+
+\begin{equation}
+    \text{overage cost} = c - s
+\end{equation}
+
+Again: remember that $s$ can be negative.
+
+\begin{equation}
+    \text{underage cost} = p - c
+\end{equation}
+
+\subsection{Critical Fractile}
+
+Expresses the underage cost as a percentage of the combined underage and overage costs.
+
+\begin{equation}
+    \text{critical fractile (cf)} = \frac{\text{underage cost}}{\text{underage cost} + \text{overage cost}} = \frac{p - c}{p - s}
+\end{equation}
+
+\subsection{Optimal Order Quantity $Q^*$}
+
+\begin{equation}
+    Q^* = F^{-1}(\text{cf})
+\end{equation}
+
+where $F^{-1}(\alpha)$ denotes inverse cumulative distribution function (CDF).
+
+\subsubsection{Example}
+
+If demand is $\mathcal{N}(\mu, \sigma)$, then $Q^* = \mu + \text{Z-score}(\text{cf}) \cdot \sigma$
+
+\subsection{Multi-product problem with capacity constraint}
+
+Find a single $z$-value that equalizes the fill rate across all products:
+
+\begin{equation}
+    z = \frac{K - \sum_{i = 1}^{N} \mu_i}{\sum_{i = 1}^{N} \sigma_i}
+\end{equation}
+
+\begin{itemize}
+    \item $N$ products that must be ordered
+    \item $K$ number units limit across all $N$ products
+\end{itemize}
+
+\textbf{Assumption}: all products all have the exact same overage and underage costs. If they differ, the optimal order
+quantities have to take into account the other SKU's stocking level to accurately calculate the combined overage and
+underage costs.
+
+\section{Bullwhip Effect}
+
+Exists when order volatility (i.e. variance) increases as you move upstream (i.e. farther from the customer / closer to the factory).
+
+\subsection{Causes}
+
+\begin{itemize}
+    \item Promotion and volume discounts
+    \item Sales incentives
+    \item \fbox{No information sharing}
+    \item Long lead-times (easily forget about the in-transit inventory)
+    \item Anxiety, emotions, distrust, \dots
+\end{itemize}
+
+\subsection{Negativities}
+
+\begin{itemize}
+    \item High production costs (switch-over, overtime, etc.)
+    \item Forcasting challenge
+    \item High transportation costs
+    \item High inventory but low service level
+    \item Hurts trust among business partners
+\end{itemize}
+
+\subsection{Solution}
+
+\fbox{Communicate more.}
+
+\section{Base Stock Policy}
+
+\begin{equation}
+\begin{split}
+    \text{average inventory on-hand} &= \text{expected cycle stock} + \text{expected safety stock} \\
+    &= \frac{r \mu}{2} + z \sigma \sqrt{r + L}
+\end{split}
+\end{equation}
+
+\begin{itemize}
+    \item \textbf{$r$ review period}: the interval of time that elapses before an inventory evaluation occurs
+    \item \textbf{$L$ replenishment time}: the elapsed time between placing an order and having the ordered unit available to satisfy demand
+    \item \textbf{$\alpha$ cycle service level (CSL)}: the probability that the SKUL will have sufficient inventory on-hand to meet all demand in an order cycle
+    \item Assume demand follows $\mathcal{N}(\mu, \sigma)$
+\end{itemize}
+
+\subsection{If given an average inventory on-hand target of $X$  (time-period-units of supply)}
+
+\begin{equation}
+    \text{current average on-hand inventory level} = X \cdot \mu
+\end{equation}
+
+where $\mu$ is the mean of the normally distributed demand on the same time-period-unit.
+
+\subsubsection{Impute service level}
+
+\begin{equation}
+\begin{split}
+    &X \mu = \frac{r \mu}{2} + z \sigma \sqrt{r + L} \\
+    \Rightarrow& z = \frac{X \mu - \frac{r \mu}{2}}{\sigma \sqrt{r + L}}\\
+    \Rightarrow& \text{service level} = \Phi(z)
+\end{split}
+\end{equation}
+
+where $\Phi(z)$ is the CDF for the standard normal random variable.
+
+In Excel: \texttt{=NORM.S.DIST(z, TRUE)}
+
+\section{Economic Order Quantity (EOQ) model}
+
+\begin{equation}
+    Q^* = \sqrt{\frac{2K\lambda}{h}}
+\end{equation}
+
+\begin{itemize}
+    \item $K$: fixed order cost incurred every time an order is placed
+    \item $\lambda$: demand in units per \underline{year}
+    \item $h = Ic$ inventory holding cost: per unit \underline{per year} cost to hold inventory\begin{itemize}
+        \item $c$: per unit purchasing cost
+        \item $I$: \underline{annual} interest rate
+    \end{itemize}
+\end{itemize}
+
+If the deterministic demand always arrives in increments of $x$ where EOQ cannot be evenly divided by $x$, update EOQ to
+be the nearest multiply of the $x$.
+
+\subsection{Reorder point}
+
+\begin{equation}
+    R = L \mu
+\end{equation}
+
+\section{Convert the underlying time unit of a normal distribution}
+
+Given \underline{weekly} demand $W \sim \mathcal{N}(\mu_W, \sigma_W)$,\begin{itemize}
+    \item Monthly demand $M \sim \mathcal{N}(4 \cdot \mu_W, \sqrt{4} \cdot \sigma_W)$ if $M = (W + W + W + W)$ and $W$ are i.i.d.
+    \item Daily demand $D \sim \mathcal{N}(\frac{\mu_W}{5}, \frac{\sigma_W}{\sqrt{5}})$, if $W = (D + D + D + D + D)$ and $D$ are i.i.d.
+\end{itemize}
+
 \end{document}
