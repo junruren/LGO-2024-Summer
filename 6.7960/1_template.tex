@@ -1,0 +1,221 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\definecolor{shadecolor}{gray}{0.9}
+\newcommand\hwnumber{1}
+\newcommand{\solution}[1]{\noindent{\begin{shaded}\textbf{My Solution:}\ #1 \end{shaded}}}
+\input{preamble}
+\begin{document}
+
+\textbf{Instructions}: There are a total of 29 points for this homework. Each question is marked with the number of points it's worth. Some questions are \textbf{not graded}, including all bonus questions. You may either hand-draw or computer-generate plots as you find appropriate, but just make sure the important trends are clear.
+  
+\textbf{Submission}: Recall the collaboration and late policies given on the \href{https://phillipi.github.io/6.7960/}{course webpage}. Upload a \textbf{PDF} of your response through \href{https://www.gradescope.com/courses/599409}{Gradescope} by \textbf{9/24 at 11:59pm ET}.
+
+ \textbf{Math primer}: A few questions use terms like ``convexity'', ``discontinuity'' and ``differentiability''. To solve the problems, only an informal understanding of these concepts is needed. For example, ReLU$(x)$ is continuous because it can be drawn without lifting your pen from the paper. ReLU$(x)$ is not differentiable everywhere since it has a ``kink'' at $x=0$.
+
+\noindent\makebox[\linewidth]{\rule{\linewidth}{0.4pt}}
+
+\vspace{-0.2in}
+\subsection*{Approximation (14pt)}
+For this section, we consider functions represented by ReLU networks with a single real-valued input and a single real-valued output, unless otherwise specified. Let $l$ denote the number of layers. For example, a network with $l=2$ layers is written: $$f(\vx; \mW_1, \mW_2, \vb_1, \vb_2) = \mW_2~\relu(\mW_1 \vx + \vb_1) + \vb_2,$$
+where input $\vx$ and output $f(\vx; \mW_1, \mW_2, \vb_1, \vb_2)$ are scalars, unless otherwise specified (and \textit{l} is the number of weight matrices).
+
+  \begin{enumerate}
+   \item \textbf{(1pt)} Consider a two-layer ReLU network with width $k$ (\ie, $k$ hidden neurons) with weight matrices $\mW_1$, $\mW_2$ and bias vectors $\vb_1, \vb_2$. $\mW_1$ is a matrix in $\R^{k \times 1}$---write down the shapes of $\mW_2, \vb_1$ and $\vb_2$.
+    \solution{
+        Add your answer here
+    }
+
+   \item \textbf{(1pt)} Write out the expression for a ReLU network with $l=3$ layers.
+    \solution{
+        Add your answer here, and so on
+    }
+
+   \item \textbf{(1pt)} Answer yes or no: For a ReLU network with $l \geq 2$ layers, in general, is the network output convex with respect to the input $\vx$? Is it concave?
+   \newline Convex: (yes/no) \newline Concave: (yes/no)
+   \item \textbf{(5pt)} Consider a ReLU network with $l$ layers, each of width $k$.
+   
+   \begin{enumerate}
+       \item \textbf{(1pt)} How many discontinuities can the output have with respect to the input?
+       
+       \item \textbf{(1pt)} Choose one. As a function of the input, the output is always:\\ (A) linear, (B) piecewise-linear, or (C) polynomial.
+       
+       \item \textbf{(2pt)} In general, is the function differentiable at every input? If yes, why? If no:
+       \begin{enumerate}
+           \item What's the smallest number of input points at which the function can be non-differentiable? 
+           \item For $l=2$ layers, what's the largest number of input points at which the function can be non-differentiable?
+           \item For a general number of layers $l$, what's the largest number of input points at which the function can be non-differentiable? Choose one:\\(A) Constant in $l$ (B) Linear in $l$ (C) polynomial in $l$ (D) exponential in $l$. 
+           
+           \hint{
+            \begin{itemize}
+               \item It is hard to derive an exact answer, so focus on asymptotics.
+               \item How are non-differentiable points related to linear regions?
+               \item Each neuron is a separating hyperplane of the previous layer output.
+               \item Assume that each linear region of the previous layer is divided (into two) by some hyperplane in the current layer. How does adding a layer affect the number of linear regions?
+           \end{itemize}
+           }
+           
+           \item Recall from lecture that a $2$-layer network ($l=2$) with sufficient width $k$ is a universal approximator. Based on your answer to the previous questions, can deeper ReLU networks ($l > 2$) be more efficient (in terms of total number of neurons / hidden units) in approximating some functions? 
+           
+       \end{enumerate}
+       
+        \item \textbf{(1pt)} In general, is the function differentiable at every input if a $\tanh$ nonlinearity is used instead of ReLU? If yes, why? If no, re-do the sub-points of part (c). 
+       
+   \end{enumerate}
+   
+   \item \textbf{(2pt)} For a $2$-layer ReLU network with width $2$ and \emph{no} biases (\ie, $\vb_1$ and $\vb_2$ are all zeros), we aim to find $\mW_1$ and $\mW_2$ so that the corresponding network has different smoothness properties. For each case, \begin{itemize}
+       \item If there exist $\mW_1$ and $\mW_2$ such that the corresponding property holds for input $x 
+       \in [-5, 5]$, 
+       provide an example of such
+       $\mW_1$ and $\mW_2$ 
+       and, for that example,
+       provide a plot of the function over $x \in [-5, 5]$.
+       
+       \item If there do not exist such $\mW_1$ and $\mW_2$, explain why.
+   \end{itemize} 
+   
+   \begin{enumerate}
+       \item \textbf{(1pt)} The function is linear.
+       
+       \item \textbf{(1pt)} The function has $2$ non-differentiable points.
+       
+       \item \textbf{(BONUS; 0pt)} The function is convex (and not linear).
+       
+       \item \textbf{(BONUS; 0pt)} The function is neither convex nor concave.
+       
+   \end{enumerate}
+   
+  
+   
+   \item \textbf{(BONUS; non-convexity of neural networks; 0pt)} 
+   Consider a $2$-layer ReLU network.
+   Plot an example to show 
+   that the network output is not guaranteed to be convex (or concave) \wrt \textbf{network parameters}.
+   You can pick the network width (although $2$ suffices).
+       
+   In particular, find a fixed input and a linear path in parameter space, and plot the network output with that fixed input while varying parameters along the linear path. The plot should be neither convex nor concave.
+
+   
+   
+   \item \textbf{(4pt)} \textbf{Logic gate ReLU networks}
+   
+   \hint{$\mathrm{ReLU}(x)$ non-linearity is like a "branching" operation at $x=0$. Can you find a set of weights such that the desired decision boundaries correspond to zero inputs to $\mathrm{ReLU}$'s?}
+    \begin{enumerate}
+       \item \textbf{(OR gate; 2pt)} Construct a \emph{$2$-layer width-$2$} ReLU network with  \emph{$2$-dimensional inputs 
+       in $\R^2$} 
+       such that: \begin{align}
+           f(\vx; \mW_1, \mW_2, \vb_1, \vb_2) > 0 \iff & \vx_1 > 0 \mathrel{\mathrm{OR}} \vx_2 > 0
+       \end{align}
+       
+       Write out the algebraic formula of $f$ with explicit $\mW_1, \mW_2, \vb_1, \vb_2$.
+       
+       \hint{Reminder, the input is not boolean.}
+       
+       \item \textbf{(XOR gate; 2pt)} Construct a ReLU network with \emph{at most $3$ layers, each with width at most $4$} and \emph{$2$-dimensional inputs in $\R^2$}  such that: \begin{align}
+           f(\vx; \mW_1, \mW_2, \vb_1, \vb_2) > 0 \iff 
+           & (\vx_1 < 0 \mathrel{\mathrm{AND}} \vx_2 > 0) \mathrel{\mathrm{OR}} {} \notag\\
+           & (\vx_1 > 0 \mathrel{\mathrm{AND}} \vx_2 < 0)
+       \end{align}
+       
+       Write out the algebraic formula of $f$ with explicit weight matrices and bias vectors.
+       
+       \hint{
+       This is a more challenging problem. Think about how to implement an AND 
+       gate.
+       }
+
+
+       
+       \item \textbf{(BONUS; NAND gate and functional completeness; 0pt)} Write down a ReLU network that implements the NAND gate. What does this tell you about the possibility of representing any boolean function with ReLU networks.
+       
+   \end{enumerate} 
+\end{enumerate}
+
+\vspace{-0.2in}
+\subsection*{Backpropagation (3pt)}
+
+\begin{enumerate}[resume]
+    \item \textbf{(3pt)} Let $\mW$ denote a $d\times d$ real matrix, and consider the following system of equations: \begin{align}
+        \vy & = \mW \vx \label{eq:first}\\
+        \vu &= \operatorname{ReLU} (\vy)\\
+        \vv & = \vu + \mW \vu\\
+        \mathcal{L} &= \tfrac{1}{2} \|\vv\|_2^2. \label{eq:last}
+    \end{align}
+    Note that $\vx, \vy, \vu$ and $\vv$ must all be vectors in $\R^d$ for these equations to make sense. Since $\|\vv\|_2^2$ denotes the standard squared Euclidean norm of vector $\vv$, $\mathcal{L}$ is a scalar.
+
+    \begin{enumerate}
+       \item \textbf{(1pt)} Show that $\displaystyle\frac{\partial \mathcal{L}}{\partial \mW_{ij}} = \sum_{m=1}^d \vv_m \cdot \displaystyle\frac{\partial \vv_m}{\partial \mW_{ij}}.$
+       \end{enumerate}
+       
+In a similar manner to part (a), one may derive the following additional relations:
+\begin{itemize}
+    \item $\displaystyle\frac{\partial \vv_m}{\partial \mW_{ij}} = \frac{\partial \vu_m}{\partial \mW_{ij}} + \delta_{im}\cdot u_j + \sum_{l=1}^d \mW_{ml}\frac{\partial \vu_l}{\partial \mW_{ij}}$.
+    \item $\displaystyle\frac{\partial \vy_k}{\partial \mW_{ij}} = \delta_{ik} \vx_j$, 
+    \newline where the ``Kronecker delta'' is given by $\displaystyle\delta_{ik}=\begin{cases}1 \text{ if } i=k; \\ 0 \text { if } i \neq k.\end{cases}$
+    \item $\displaystyle \frac{\partial \vu_l}{\partial \vy_k} = \delta_{lk} \cdot \Theta(\vy_k)$, 
+    \newline where $\Theta$ 
+    denotes the Heaviside step function given by $\displaystyle\Theta(\vy_k)=\begin{cases}1 \text{ if } \vy_k\geq0; \\ 0 \text { if } \vy_k < 0.\end{cases}$
+\end{itemize}
+       \begin{enumerate}
+       \setcounter{enumii}{1}
+       \item \textbf{(2pt)} Let $\frac{\partial \mathcal{L}}{\partial \mW}$ denote the matrix with entries $(\frac{\partial \mathcal{L}}{\partial \mW})_{ij} = \frac{\partial \mathcal{L}}{\partial \mW_{ij}}$. 
+       Using the given relations and your answer to part (a),
+       show that:
+       $$\frac{\partial \mathcal{L}}{\partial \mW} = \vv \otimes \vu + \operatorname{diag}(\Theta(\vy)) (\mI + \mW^\top) \vv \otimes \vx,$$
+       where $\otimes$ is the outer product and $\operatorname{diag}$ shapes its input into a diagonal matrix.
+
+    \end{enumerate}
+
+    
+    The advantage of this kind of expression for $\frac{\partial \mathcal{L}}{\partial \mW}$ is that it is easy to code up in PyTorch, and makes efficient use of matrix multiplication primitives, which have highly optimized, parallelized implementations on GPU.
+\end{enumerate}
+
+\vspace{-0.2in}
+\subsection*{PyTorch (0pt)}
+
+\begin{enumerate}[resume]
+    \item \textbf{(NOT GRADED; 0pt)} Complete PyTorch tutorial colab notebooks \href{https://github.com/davidbau/how-to-read-pytorch}{here}. Before proceeding with the following section, you should at least complete the notebooks ("Tensor Arithmetic" and "Network Modules"). 
+\end{enumerate}
+
+\vspace{-0.2in}
+\subsection*{CIFAR-10 Classification (12pt)}
+
+In this section, we are going to work on \href{https://colab.research.google.com/drive/1H_Htddamebxg7trHfaO9uGiG_IuCi2b9?usp=sharing}{this colab notebook} to train a network for classifying a handwritten digit dataset, CIFAR-10 \citep{krizhevsky2009learning,torralba200880}. 
+
+
+The following questions 9-15 are stated in detail in the colab notebook. Please include your added lines of code, text output, and any plots to them in the same pdf submission.
+
+To download a plot from colab, hold \texttt{shift} while you right click on the image.
+
+\textbf{Note:} A lot of skeleton code is provided to you already. Make sure to read through and understand them. We will provide \textit{less} skeleton code in future assignments as you get more used to deep learning code structures.
+
+\begin{enumerate}[resume]
+    \item \textbf{(Building neural networks; 4pt)} Complete the incomplete \texttt{forward} and \texttt{backward} definitions of the module classes, each using $\leq 5$ lines of code. We expect this question to take more time, as you are being asked to derive and implement the backward pass for multiple components.
+    \hint{Recall, for linear layers, the forward pass takes the form: $out = \mW \vx+\vb$, and the backward pass requires us to know $\frac{dL}{d{out}}$,  $\frac{dL}{d \vx}$, $\frac{dL}{d \vb}$. ReLU and Loss layers can be similarly computed.}
+    
+    \begin{enumerate}
+        \item \textbf{(1pt)} \texttt{Linear.forward}
+        \item \textbf{(1pt)} \texttt{Linear.backward}
+        \item \textbf{(1pt)} \texttt{ReLU.backward}
+        \item \textbf{(1pt)} \texttt{CrossEntropyLoss.backward}
+    \end{enumerate}
+
+    \item \textbf{(Training loop; 2pt)} Complete the missing parts in \texttt{train\_epoch} and \texttt{evaluate} functions, each using $\leq 5$ lines of code.
+    
+    \item \textbf{(Training curve 1; 2pt)} Train a model for $30$ epochs and plot the learning curves. Comment on any interesting observation from the plot.
+    
+    \item \textbf{(Universal approximation; 1pt)} Neural networks are universal approximators, which means that we can always find a network that fits the training set. Why do you think that we didn't get perfect training accuracy? Write down some ideas for improving training accuracy. Is a perfect training accuracy all we need?
+    
+    \item \textbf{(Data augmentation; 1pt)} Write code to create training and validation datasets, where \textbf{only the training set} has a random cropping augmentation (specifications in colab). Visualize the effect of the augmentation.
+    
+    Provide both your code ($\leq 5$ lines) and your visualization.
+
+    \item \textbf{(Training curve 2; 2pt)} Train a model on the new training dataset and plot the learning curves. Comment on any difference you observe from the previous curves. 
+
+\end{enumerate}
+
+\bibliographystyle{plainnat}
+\bibliography{reference}
+
+\end{document}
