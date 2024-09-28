@@ -1,0 +1,102 @@
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{palatino}
+\usepackage{natbib}
+\usepackage{xcolor}
+\usepackage[capitalize]{cleveref}
+\usepackage{xspace}
+\usepackage{inconsolata}
+\usepackage{microtype}
+\usepackage{mathtools}
+\usepackage{soul}
+\usepackage{mdframed}
+
+\input{math_notation}
+\newcommand{\given}{\mathrel{\vert}}
+\newcommand*{\eg}{e.g.\@\xspace}
+\newcommand*{\ie}{i.e.\@\xspace}
+\newcommand*{\Eg}{E.g.\@\xspace}
+\newcommand*{\Ie}{I.e.\@\xspace}
+\newcommand*{\esp}{esp.\@\xspace}
+\newcommand*{\wrt}{\ifmmode \stext{w.r.t.} \else w.r.t.\@\xspace \fi}
+\newcommand*{\aever}{\ifmmode \stext{a.e.} \else a.e.\@\xspace \fi}
+\newcommand*{\asurely}{\ifmmode \stext{a.s.} \else a.s.\@\xspace \fi}
+% \newcommand*{\st}{\ifmmode \stext{s.t.} \else s.t.\@\xspace \fi}
+\newcommand*{\wprob}{\ifmmode \stext{w.p.} \else w.p.\@\xspace \fi}
+\newcommand*{\etc}{%
+    \@ifnextchar{.}%
+        {etc}%
+        {etc.\@\xspace}%
+}
+\newcommand{\lhs}[0]{\hspace{2em}&\hspace{-2em}}
+\newcommand{\trieq}[0]{\triangleq}
+\newcommand{\eqin}[1]{\overset{#1}{=}}
+\newcommand{\defeq}[0]{\overset{\mbox{\normalfont\tiny def}}{=}}
+
+\newcommand{\hltexttt}[1]{\texttt{\hl{\,#1\,}}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\T}{^\mathsf{T}}
+\newcommand{\Sp}{\mathbb{S}}
+\newcommand{\expsub}[1]{\underset{#1}{\scalebox{1.475}{$\mathbb{E}$}}}
+\newcommand{\expsubst}[1]{\expsub{\scalebox{1.2}{\ensuremath{\substack{\mathstrut#1}}}}}
+\mathchardef\mhyphen="2D
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1},
+  citecolor=[rgb]{0,0.55,0.27}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.1in}
+\setlist[enumerate]{parsep=5pt}
+
+\pagestyle{fancyplain}
+\headheight 40pt
+\lhead{\textbf{Junru Ren} \\ \texttt{junruren@mit.edu}
+}
+% \lhead{\NetIDa}
+% \lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Homework \hwnumber}}
+\newcommand\course{6.7960 Deep Learning}
+% \chead{\textbf{\Large Homework \hwnumber~{\color{red} Solution}}}
+\rhead{\course \\Fall 2024
+}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\newcommand{\fixme}[1]{{\color{red} \bf FIXME: #1}}
+\newcommand{\answer}[1]{{\color{red}\textbf{Answer}: #1}}
+\newcommand{\hint}[1]{{\color{black}\textbf{Hint}: \color{gray}#1}}
+\newcommand{\grader}[1]{{\color{blue}\textbf{Grader comments}: #1}}
+
+\usepackage{listings}
+\usepackage{framed}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{shadecolor}{gray}{0.9}
+\newcommand{\solution}[1]{\noindent{\begin{shaded}\textbf{My Solution:}\ #1 \end{shaded}}}
