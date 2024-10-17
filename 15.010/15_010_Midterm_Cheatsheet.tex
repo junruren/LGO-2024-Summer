@@ -91,10 +91,7 @@
 \Red{Consumer Demand} For each price $P$ what quantity is demanded? $Q = Q_D (P)$. \textbf{Inverse demand}: the price at which quantity Q could be sold. $P = P_D (Q)$
 \Hint{\textbf{Remember!} Given $Q(P)$, \underline{inverse} it to plot $P(Q)$!}
 
-\begin{wrapfigure}{r}{0.7\columnwidth}
-    \includegraphics[width=0.7\columnwidth]{CS.jpg}
-\end{wrapfigure}
-\Red{Consumer Surpluse} Area below demand curve and above price paid.
+\Red{Consumer Surplus} Area below demand curve and above price paid.
 
 \Blue{Elasticity} meansure of price sensitivity
 \Green{Own-price elasticity of demand $\frac{\% \Delta Q_1^D}{\% \Delta P_1}$} the \% change in quantity demanded for a
@@ -196,10 +193,37 @@ $\frac{\Delta Cost}{\Delta Q}$; and for small changes, $\frac{d Cost}{d Q}$. \Hi
 Decrease price results in: \textbf{\textcolor{Blue}{gain}} in Rev from Q increases + \textbf{\textcolor{Red}{loss}} in Revenue from P reduction for all units.
 \Hint{If demand curve linear, MR has same intercept and twice the slope. $P(Q) = 100 - Q \rightarrow MR = 100 - 2 Q$}
 
-\begin{wrapfigure}{r}{0.4\columnwidth}
-    \includegraphics[width=0.4\columnwidth]{ProfitMax.png}
-\end{wrapfigure}
+\begin{multicols}{2}
+\begin{tikzpicture}
+    % CS
+    \fill[yellow!30] (0, 1.3) -- (0.7, 1.3) -- (0, 2) -- cycle;
+
+    %DWL
+    \fill[red!30] (0.7, 0.6) -- (0.7, 1.3) -- (1.167, 0.833) -- cycle;
+
+    %PS
+    \fill[orange!30] (0, 0.25) -- (0, 1.3) -- (0.7, 1.3) -- (0.7, 0.6) -- cycle;
+
+    \draw[dashed,gray] (0, 1.3) -- (0.7, 1.3);
+    \draw[dashed,gray] (0.7, 0) -- (0.7, 1.3);
+    \draw[thick,blue!90] (0,2) -- (2,0) node[anchor=south] {\tiny Demand}; % D
+    \draw[thick, blue!70] (0,2) -- (1,0) node[anchor=south] {\tiny MR}; % MR
+    \draw[thick, green!70] (0,0.25) -- (2,1.25) node[anchor=west] {\tiny MC}; % MC
+    % Draw axes
+    \draw[->] (0,0) -- (2.5,0) node[anchor=north] {$Q$};
+    \draw[->] (0,0) -- (0,2.5) node[anchor=east] {$P$};
+    
+    % Label values
+    \node[anchor=north] at (0.7,0) {\tiny $Q^*$};
+    \node[anchor=east] at (0,1.3) {\tiny $P^*$};
+    \node at (0.2,1.5) {\tiny CS};
+    \node at (0.3,1) {\tiny PS};
+    \node at (1,0.9) {\tiny DWL};
+
+\end{tikzpicture}
+
 \Green{Profix Maximization} optimal $Q^*$ when $MC(Q^*) = MR(Q^*)$. Then solve for optimal price $P^* =P(Q^*)$
+\end{multicols}
 
 \Green{Mark-up Formula} resulting from profit-max, $P^*$ satisfies: $\frac{P-MC}{P} = -\frac{1}{\epsilon}$ ($\epsilon$ is the demand elasticity).
 Relatively more elastic markets (markets with more price-sensitive consumers) will face smaller markups (i.e., lower prices if costs are the same across markets).
