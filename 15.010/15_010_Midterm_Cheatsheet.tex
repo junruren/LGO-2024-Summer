@@ -13,6 +13,7 @@
 \usepackage{MnSymbol}
 \usepackage{graphicx}
 \usepackage{wrapfig}
+\usepackage{tikz}
 
 \usepackage{blindtext}
 
@@ -42,7 +43,7 @@
 \renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
                                 {-1ex plus -.5ex minus -.2ex}%
                                 {0.5ex plus .2ex}%
-                                {\normalfont\small\bfseries}}
+                                {\normalfont\footnotesize\bfseries}}
 \makeatother
 
 % Itemize to use less space
@@ -64,15 +65,15 @@
 %My Environments
 \newtheorem{example}[section]{Example}
 
-\newcommand{\Blue}[1]{\noindent{\textbf{\textcolor{Blue}{#1 -}}}}
-\newcommand{\Red}[1]{\noindent{\textbf{\textcolor{BrickRed}{#1 -}}}}
-\newcommand{\Green}[1]{\noindent{\textbf{\textcolor{PineGreen}{#1 -}}}}
+\newcommand{\Blue}[1]{\noindent{\textcolor{Blue}{\textbf{#1}}}: }
+\newcommand{\Red}[1]{\noindent{\textcolor{BrickRed}{\textbf{#1}}}: }
+\newcommand{\Green}[1]{\noindent{\textcolor{PineGreen}{\textbf{#1}}}: }
 \newcommand{\Hint}[1]{\noindent{\textcolor{Orange}{#1}}}
 % -----------------------------------------------------------------------
 
 \begin{document}
 \raggedright
-\footnotesize
+\scriptsize
 
 \begin{multicols}{4}
 % multicol parameters
@@ -83,14 +84,14 @@
 \setlength{\multicolsep}{1pt}
 \setlength{\columnsep}{2pt}
 
-\subsection{Consumer Demand}
+\subsubsection{Consumer Demand}
 
 \Blue{Willingness To Pay (WTP)} The most a consumer will pay for a good.
 
 \Red{Consumer Demand} For each price $P$ what quantity is demanded? $Q = Q_D (P)$. \textbf{Inverse demand}: the price at which quantity Q could be sold. $P = P_D (Q)$
 
-\begin{wrapfigure}{r}{0.75\columnwidth}
-    \includegraphics[width=0.75\columnwidth]{CS.jpg}
+\begin{wrapfigure}{r}{0.5\columnwidth}
+    \includegraphics[width=0.5\columnwidth]{CS.jpg}
 \end{wrapfigure}
 \Red{Consumer Surpluse} Area below demand curve and above price paid.
 
@@ -107,7 +108,7 @@
     < 0 & \text{COMPLEMENTS (popcorn \& beer)}
 \end{cases}$
 
-\subsection{Demand Estimation}
+\subsubsection{Demand Estimation}
 
 \Red{Demand Shifts} Any change in the envrionment that changes demand other than price. E.g. before and after advertising.
 
@@ -124,7 +125,7 @@
 \Green{Equity Tradeoffs} different equity objectives may exist in different applications. Continuous algorithmic
 testing, penalties for disparities, affirmative information potential solutions.
 
-\subsection{Costs}
+\subsubsection{Costs}
 
 \Blue{Sunk Cost} costs that are unavoidable and cannot be recovered. Whether a cost is sunk or not depends on the timing
 of the business decision.
@@ -161,7 +162,7 @@ annual interest rate (opportunity cost of capital) and $t =$ number of years in 
         $NPV = - \frac{200}{1.1} - \frac{200}{1.21} - \frac{200}{1.331} = -497$
 \end{itemize}
 
-\subsection{Sources of Market Power}
+\subsubsection{Sources of Market Power}
 
 \Red{Barriers to entry} e.g. large fixed costs
 
@@ -179,7 +180,7 @@ elastic} so an aggressive pricing strategy becomes more profitable.
 output (e.g., manufacturing processes have strong learning effects.) Google Search has strong learning effects: more
 experience $\rightarrow$ more data $\rightarrow$ better machine learning for search algorithm and targeted advertising.
 
-\subsection{Monopoly Pricing}
+\subsubsection{Monopoly Pricing}
 
 \Red{Monopoly} a single firm is in the market.
 
@@ -202,7 +203,7 @@ Decrease price results in: \textbf{\textcolor{Blue}{gain}} in Rev from Q increas
 \Green{Mark-up Formula} resulting from profit-max, $P^*$ satisfies: $\frac{P-MC}{P} = -\frac{1}{\epsilon}$ ($\epsilon$ is the demand elasticity).
 Relatively more elastic markets (markets with more price-sensitive consumers) will face smaller markups (i.e., lower prices if costs are the same across markets).
 
-\subsection{Consumer Self-Selection and Two-Part Tariffs}
+\subsubsection{Consumer Self-Selection and Two-Part Tariffs}
 
 \Red{Price Discrimination} requires \begin{itemize}
     \item Market power (competition undermines price discrimination)
@@ -222,6 +223,180 @@ high WTP buyers since they buy more.
 
 \Hint{A consumer pays a two-part tariff if their Total WTP at that price $\ge F + P \cdot Q$}, where $Q$ is the quantity
 they would consume at price $P$ (can get $Q$ from their demand curve).
+
+\subsubsection{Product Portfolios}
+Consumers maximize surplus so they pick a choice with higher CS out of multiple (products/two-part tarrifs).
+\Hint{By reducing the quality of its low-end goods, a firm can often make these goods much less attractive for high WTP
+buyers, while having a comparatively smaller effect on the value to low WTP buyers.} For any given portfolio of products:
+\begin{enumerate}
+    \item For \textbf{each consumer type} (e.g. H and L) and for \textbf{for each choice} (e.g. S and I), compute CS and
+        they will buy the choice with highest CS.
+    \item Estimate profits from \textbf{each consumer type} from buying their preferred choice. Multiply profit per
+        consumer from that type with the \# of such type to get total profit from this consumer type.
+    \item Add up profits across all consumer types.
+    \item \textbf{Check}: are consumers buying the product you are targeting with? \begin{itemize}
+        \item No: adjust product portfolio and/or price; then re-estimate above.
+        \item Yes: try adjusting prices such that the \textbf{Check} still holds \textit{AND} profits increase.
+    \end{itemize}
+\end{enumerate}
+\begin{tabular}{|c|c|c|}
+    \hline
+    Consumer WTP & \textbf{S}uperior Prod & \textbf{I}nferior Prod \\ \hline
+    Type H & 5000 & 2000 \\
+    Type L & 3000 & 1000 \\ \hline
+\end{tabular}
+To max value extraction serving \underline{both markets}:
+\begin{enumerate}
+    \item Set $P_{I} = WTP_{L,I} = \$1000$
+    \item Set $P_{S} = WTP_{H,S} - CS_{H,I}= \$5000 - (\$2000 - \$1000) = \$4000$
+\end{enumerate}
+
+\subsubsection{Strategic Pricing \& Bundling}
+\Red{Bundling} practice of selling different goods in a package.
+\begin{wrapfigure}{r}{0.6\columnwidth}
+    \includegraphics[width=0.6\columnwidth]{Bundling.png}
+\end{wrapfigure}
+\Blue{Bundled discount} a price reduction (relative to single-product prices) for a customer who buys a specified
+combination of products.
+
+\Hint{In graph: consumer's WTP on A and B.}
+
+\subsubsection{Adverse Selection}
+
+Arises when the buyers who are costlier to serve are also the ones who are most inclined to purchase, and firms \textbf{cannot
+tell which consumers are higher} vs. lower cost to serve. Affects markets across sectors and product type e.g.
+insurance, cars, restaurants, as long as lack of information on “good” vs. “bad” risks. In extreme cases, adverse
+selection can make it impossible for a firm to sell a product profitably.
+If higher WTP customers are also higher cost to serve while we need to price above the AC, it's
+\textcolor{red}{impossible} to find such price.
+
+\Blue{Firm-level solutions} (i) Add information (screening \& signaling) about which consumers are high vs. low cost to
+serve; (ii) Warrenties, reputation, advertising; (iii) Strategic pricing: Premium, deductible and co-pay.
+
+\Blue{Policy-level solutions} (i) Lemons Laws; (ii) BBB (firm reputation); (iii) Risk Pooling e.g. health insurance
+prices set at the community level, insurance mandates.
+\begin{multicols}{2}
+\Blue{Individual pricing} separate decisions for each product.
+\begin{itemize}
+    \item buy A if $V_A \ge p_A$
+    \item buy B if $V_B \ge p_B$
+\end{itemize}
+\begin{tikzpicture}
+
+    % Draw axes
+    \draw[->] (0,0) -- (2.5,0) node[anchor=north] {$V_A$};
+    \draw[->] (0,0) -- (0,2.5) node[anchor=east] {$V_B$};
+
+    % Dashed lines for the boundaries
+    \draw[dashed] (2,0) -- (2,2.5);
+    \draw[dashed] (0,2) -- (2.5,2);
+
+    % Labels for P_A and P_B
+    \node[anchor=north] at (1,0) {$P_A$};
+    \node[anchor=east] at (0,1) {$P_B$};
+
+    % Draw the regions
+    \fill[red!30] (0,0) rectangle (1,1); % buy nothing
+    \fill[blue!30] (1,0) rectangle (2,1); % buy A
+    \fill[yellow!30] (0,1) rectangle (1,2); % buy B
+    \fill[green!30] (1,1) rectangle (2,2); % buy both
+
+    % Label the regions
+    \node at (0.5,0.5) {nothing};
+    \node at (1.5,0.5) {buy A};
+    \node at (0.5,1.5) {buy B};
+    \node at (1.5,1.5) {both};
+
+    % Arrows for directions
+    \draw[->] (1.1, 0.25) -- (1.5, 0.25);
+    \draw[->] (0.25, 1.1) -- (0.25, 1.5);
+
+    % Labels for \overline{V_A} and \overline{V_B}
+    \node[anchor=north] at (2,0) {$\overline{V_A}$};
+    \node[anchor=east] at (0,2) {$\overline{V_B}$};
+\end{tikzpicture}
+\Blue{Pure bundling} only the total value of the bundle matters. Buy bundle if $V_A + V_B \ge P_\text{bundle}$
+\begin{tikzpicture}
+    % Draw axes
+    \draw[->] (0,0) -- (2.5,0) node[anchor=north] {$V_A$};
+    \draw[->] (0,0) -- (0,2.5) node[anchor=east] {$V_B$};
+
+    % Dashed lines for the boundaries
+    \draw[dashed] (2,0) -- (2,2.5);
+    \draw[dashed] (0,2) -- (2.5,2);
+
+    % Labels for P_bundle
+    \node[anchor=north] at (1.5,0) {$P_{\text{bndl}}$};
+    \node[anchor=east] at (0,1.5) {$P_{\text{bndl}}$};
+
+    % Draw the regions
+    \fill[red!30] (0,0) -- (0,1.5) -- (1.5,0) -- cycle; % buy nothing
+    \fill[green!30] (0,1.5) -- (0,2) -- (2,2) -- (2,0) -- (1.5,0) -- cycle; % buy both
+
+    % Draw the diagonal boundary (halved coordinates)
+    \draw[thick] (0,1.5) -- (1.5,0);
+
+    % Label the regions
+    \node at (0.5,0.5) {nothing};
+    \node at (1.5,1.5) {buy both};
+
+    % Arrow for directional indication
+    \draw[->] (0.9,0.9) -- (1.3,1.3);
+
+    % Labels for \overline{V_A} and \overline{V_B}
+    \node[anchor=north] at (2,0) {$\overline{V_A}$};
+    \node[anchor=east] at (0,2) {$\overline{V_B}$};
+\end{tikzpicture}
+\Blue{Mixed bundling} choose the option that gives you the highest CS. $P_{\text{bndl}} = P_A + P_B - D$.
+Choose max out of:
+\begin{itemize}
+    \item $0$ nothing
+    \item $V_A-P_A$ A only
+    \item $V_B-P_B$ B only
+    \item $V_A + V_B - P_{\text{bndl}}$ bundle
+\end{itemize}
+\begin{tikzpicture}
+    % Draw axes
+    \draw[->] (0,0) -- (2.5,0) node[anchor=north] {$V_A$};
+    \draw[->] (0,0) -- (0,2.5) node[anchor=east] {$V_B$};
+
+    % Dashed lines for the boundaries
+    \draw[dashed] (2,0) -- (2,2.5);
+    \draw[dashed] (0,2) -- (2.5,2);
+
+    % Labels for P_bundle, P_A, P_B, P_A-D, and P_B-D
+    \node[anchor=north] at (1,0) {\tiny $P_A$};
+    \node[anchor=north] at (0.5,0) {\tiny $P_{A} - D$};
+    \node[anchor=north] at (1.5,0) {\tiny $P_{\text{bndl}}$};
+
+    \node[anchor=east] at (0,1) {\tiny $P_B$};
+    \node[anchor=east] at (0,0.5) {\tiny $P_{B} - D$};
+    \node[anchor=east] at (0,1.5) {\tiny $P_{\text{bndl}}$};
+
+    % Draw the regions
+    \fill[red!30] (0,0) -- (0,1) -- (0.5,1) -- (1,0.5) -- (1,0) -- cycle; % buy nothing
+    \fill[blue!30] (1,0) -- (2,0) -- (2,0.5) -- (1,0.5) -- cycle; % buy only A
+    \fill[yellow!30] (0,1) -- (0,2) -- (0.5,2) -- (0.5,1) -- cycle; % buy only B
+    \fill[green!30] (1,0.5) -- (2,0.5) -- (2,2) -- (0.5, 2) -- (0.5, 1) -- cycle; % buy both
+
+    % Draw the thick line dividing "buy nothing" and "buy only A"
+    \draw[dashed] (0,1.5) -- (1.5,0);
+    \draw[dashed] (0,0.5) -- (2, 0.5);
+    \draw[dashed] (0.5,0) -- (0.5,2);
+    \draw[thick] (1,0.5) -- (0.5,1);
+
+    % Label the regions
+    \node at (0.4,0.4) {\tiny nothing};
+    \node at (0.25,1.5) {\tiny B};
+    \node at (1.5,1.5) {both};
+    \node at (1.5,0.25) {\tiny A};
+
+    % Labels for \overline{V_A} and \overline{V_B}
+    \node[anchor=north] at (2,0) {\tiny $\overline{V_A}$};
+    \node[anchor=east] at (0,2) {\tiny $\overline{V_B}$};
+\end{tikzpicture}
+
+\end{multicols}
 
 \end{multicols}
 \end{document}
