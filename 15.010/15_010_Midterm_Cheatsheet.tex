@@ -65,9 +65,9 @@
 %My Environments
 \newtheorem{example}[section]{Example}
 
-\newcommand{\Blue}[1]{\noindent{\textcolor{Blue}{\textbf{#1}}}: }
-\newcommand{\Red}[1]{\noindent{\textcolor{BrickRed}{\textbf{#1}}}: }
-\newcommand{\Green}[1]{\noindent{\textcolor{PineGreen}{\textbf{#1}}}: }
+\newcommand{\Blue}[1]{\noindent{\textcolor{Blue}{\textbf{#1}}}:}
+\newcommand{\Red}[1]{\noindent{\textcolor{BrickRed}{\textbf{#1}}}:}
+\newcommand{\Green}[1]{\noindent{\textcolor{PineGreen}{\textbf{#1}}}:}
 \newcommand{\Hint}[1]{\noindent{\textcolor{Orange}{#1}}}
 % -----------------------------------------------------------------------
 
@@ -90,8 +90,8 @@
 
 \Red{Consumer Demand} For each price $P$ what quantity is demanded? $Q = Q_D (P)$. \textbf{Inverse demand}: the price at which quantity Q could be sold. $P = P_D (Q)$
 
-\begin{wrapfigure}{r}{0.5\columnwidth}
-    \includegraphics[width=0.5\columnwidth]{CS.jpg}
+\begin{wrapfigure}{r}{0.7\columnwidth}
+    \includegraphics[width=0.7\columnwidth]{CS.jpg}
 \end{wrapfigure}
 \Red{Consumer Surpluse} Area below demand curve and above price paid.
 
@@ -252,35 +252,21 @@ To max value extraction serving \underline{both markets}:
 \end{enumerate}
 
 \subsubsection{Strategic Pricing \& Bundling}
+
 \Red{Bundling} practice of selling different goods in a package.
-\begin{wrapfigure}{r}{0.6\columnwidth}
-    \includegraphics[width=0.6\columnwidth]{Bundling.png}
-\end{wrapfigure}
+
 \Blue{Bundled discount} a price reduction (relative to single-product prices) for a customer who buys a specified
 combination of products.
 
-\Hint{In graph: consumer's WTP on A and B.}
-
-\subsubsection{Adverse Selection}
-
-Arises when the buyers who are costlier to serve are also the ones who are most inclined to purchase, and firms \textbf{cannot
-tell which consumers are higher} vs. lower cost to serve. Affects markets across sectors and product type e.g.
-insurance, cars, restaurants, as long as lack of information on “good” vs. “bad” risks. In extreme cases, adverse
-selection can make it impossible for a firm to sell a product profitably.
-If higher WTP customers are also higher cost to serve while we need to price above the AC, it's
-\textcolor{red}{impossible} to find such price.
-
-\Blue{Firm-level solutions} (i) Add information (screening \& signaling) about which consumers are high vs. low cost to
-serve; (ii) Warrenties, reputation, advertising; (iii) Strategic pricing: Premium, deductible and co-pay.
-
-\Blue{Policy-level solutions} (i) Lemons Laws; (ii) BBB (firm reputation); (iii) Risk Pooling e.g. health insurance
-prices set at the community level, insurance mandates.
+\Hint{In graphes: each point's coordinates are one consumer's WTP on A and B. $\overline{V_A}$ and $\overline{V_B}$: highest WTPs any customers have for A and B.}
 \begin{multicols}{2}
 \Blue{Individual pricing} separate decisions for each product.
+
 \begin{itemize}
     \item buy A if $V_A \ge p_A$
     \item buy B if $V_B \ge p_B$
 \end{itemize}
+
 \begin{tikzpicture}
 
     % Draw axes
@@ -315,6 +301,9 @@ prices set at the community level, insurance mandates.
     \node[anchor=north] at (2,0) {$\overline{V_A}$};
     \node[anchor=east] at (0,2) {$\overline{V_B}$};
 \end{tikzpicture}
+\end{multicols}
+
+\begin{multicols}{2}
 \Blue{Pure bundling} only the total value of the bundle matters. Buy bundle if $V_A + V_B \ge P_\text{bundle}$
 \begin{tikzpicture}
     % Draw axes
@@ -347,6 +336,9 @@ prices set at the community level, insurance mandates.
     \node[anchor=north] at (2,0) {$\overline{V_A}$};
     \node[anchor=east] at (0,2) {$\overline{V_B}$};
 \end{tikzpicture}
+\end{multicols}
+
+\begin{multicols}{2}
 \Blue{Mixed bundling} choose the option that gives you the highest CS. $P_{\text{bndl}} = P_A + P_B - D$.
 Choose max out of:
 \begin{itemize}
@@ -395,8 +387,22 @@ Choose max out of:
     \node[anchor=north] at (2,0) {\tiny $\overline{V_A}$};
     \node[anchor=east] at (0,2) {\tiny $\overline{V_B}$};
 \end{tikzpicture}
-
 \end{multicols}
+
+\subsubsection{Adverse Selection}
+
+Arises when the buyers who are costlier to serve are also the ones who are most inclined to purchase, and firms \textbf{cannot
+tell which consumers are higher} vs. lower cost to serve. Affects markets across sectors and product type e.g.
+insurance, cars, restaurants, as long as lack of information on “good” vs. “bad” risks. In extreme cases, adverse
+selection can make it impossible for a firm to sell a product profitably.
+If higher WTP customers are also higher cost to serve while we need to price above the AC, it's
+\textcolor{red}{impossible} to find such price.
+
+\Blue{Firm-level solutions} (i) Add information (screening \& signaling) about which consumers are high vs. low cost to
+serve; (ii) Warrenties, reputation, advertising; (iii) Strategic pricing: Premium, deductible and co-pay.
+
+\Blue{Policy-level solutions} (i) Lemons Laws; (ii) BBB (firm reputation); (iii) Risk Pooling e.g. health insurance
+prices set at the community level, insurance mandates.
 
 \end{multicols}
 \end{document}
